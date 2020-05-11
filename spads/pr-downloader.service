@@ -1,0 +1,11 @@
+[Unit]
+Description=pr-Downloader
+After=network.target
+
+[Service]
+User=uberserver
+Type=oneshot
+ExecStart=/usr/games/pr-downloader --filesystem-writepath /home/uberserver/builds/spads/var/spring/data byar:test
+StandardOutput=journal
+
+

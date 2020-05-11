@@ -1,0 +1,9 @@
+[Unit]
+Description=Run rclone maps every 5min
+
+[Timer]
+OnActiveSec=5sec
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
