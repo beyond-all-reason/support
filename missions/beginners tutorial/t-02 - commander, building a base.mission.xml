@@ -1,0 +1,1421 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mission xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="1" z:Type="CMissionLib.Mission" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib">
+  <Author z:Id="2">Default Author</Author>
+  <ContentFolderPath i:nil="true" />
+  <Counters xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="3">
+    <d2p1:items z:Id="4" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+      <d2p1:_items z:Id="5" z:Size="0" />
+      <d2p1:_size>0</d2p1:_size>
+      <d2p1:_version>0</d2p1:_version>
+    </d2p1:items>
+    <d2p1:_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="6">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </d2p1:_monitor>
+  </Counters>
+  <CustomModOptions i:nil="true" />
+  <Description z:Id="7"></Description>
+  <DescriptionStory i:nil="true" />
+  <DisabledGadgets xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="8">
+    <d2p1:items z:Id="9" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+      <d2p1:_items z:Id="10" z:Size="4">
+        <d2p1:string z:Id="11">game_initial_spawn.lua</d2p1:string>
+        <d2p1:string i:nil="true" />
+        <d2p1:string i:nil="true" />
+        <d2p1:string i:nil="true" />
+      </d2p1:_items>
+      <d2p1:_size>1</d2p1:_size>
+      <d2p1:_version>1</d2p1:_version>
+    </d2p1:items>
+    <d2p1:_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="12">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </d2p1:_monitor>
+  </DisabledGadgets>
+  <DisabledUnits xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="13">
+    <d2p1:items z:Id="14" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+      <d2p1:_items z:Ref="5" i:nil="true" />
+      <d2p1:_size>0</d2p1:_size>
+      <d2p1:_version>0</d2p1:_version>
+    </d2p1:items>
+    <d2p1:_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="15">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </d2p1:_monitor>
+  </DisabledUnits>
+  <DisabledWidgets xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="16">
+    <d2p1:items z:Id="17" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+      <d2p1:_items z:Id="18" z:Size="8">
+        <d2p1:string z:Id="19">gui_pauseScreen.lua</d2p1:string>
+        <d2p1:string z:Id="20">gui_center_n_select.lua</d2p1:string>
+        <d2p1:string z:Id="21">gui_take_remind.lua</d2p1:string>
+        <d2p1:string z:Id="22">gui_startup_info_selector.lua</d2p1:string>
+        <d2p1:string z:Id="23">gui_local_colors.lua</d2p1:string>
+        <d2p1:string z:Id="24">spring_direct_launch.lua</d2p1:string>
+        <d2p1:string i:nil="true" />
+        <d2p1:string i:nil="true" />
+      </d2p1:_items>
+      <d2p1:_size>6</d2p1:_size>
+      <d2p1:_version>8</d2p1:_version>
+    </d2p1:items>
+    <d2p1:_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="25">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </d2p1:_monitor>
+  </DisabledWidgets>
+  <ImagePath i:nil="true" />
+  <MapName z:Id="26">Cooper_Hill_TNM02-V1</MapName>
+  <MaxUnits>5000</MaxUnits>
+  <ModName z:Id="27">Balanced Annihilation Reloaded Core $VERSION</ModName>
+  <Name z:Id="28">New Mission</Name>
+  <Players z:Id="29">
+    <items z:Id="30" z:Type="System.Collections.Generic.List`1[[CMissionLib.Player, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+      <_items z:Id="31" z:Size="4">
+        <Player z:Id="32">
+          <AIDll z:Id="33">NullAI</AIDll>
+          <AIVersion z:Id="34">0.1</AIVersion>
+          <Alliance z:Id="35">Alliance 1</Alliance>
+          <Color xmlns:d6p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+            <d6p1:A>255</d6p1:A>
+            <d6p1:B>255</d6p1:B>
+            <d6p1:G>0</d6p1:G>
+            <d6p1:R>0</d6p1:R>
+            <d6p1:ScA>1</d6p1:ScA>
+            <d6p1:ScB>1</d6p1:ScB>
+            <d6p1:ScG>0</d6p1:ScG>
+            <d6p1:ScR>0</d6p1:ScR>
+          </Color>
+          <ColorBrush xmlns:d6p1="http://schemas.datacontract.org/2004/07/System.Windows.Media" z:Id="36">
+            <d6p1:Opacity>1</d6p1:Opacity>
+            <d6p1:RelativeTransform z:Id="37" z:Type="System.Windows.Media.MatrixTransform" z:Assembly="PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+              <d6p1:Matrix>
+                <d6p1:_m11>1</d6p1:_m11>
+                <d6p1:_m12>0</d6p1:_m12>
+                <d6p1:_m21>0</d6p1:_m21>
+                <d6p1:_m22>1</d6p1:_m22>
+                <d6p1:_offsetX>0</d6p1:_offsetX>
+                <d6p1:_offsetY>0</d6p1:_offsetY>
+                <d6p1:_padding>0</d6p1:_padding>
+                <d6p1:_type>TRANSFORM_IS_IDENTITY</d6p1:_type>
+              </d6p1:Matrix>
+            </d6p1:RelativeTransform>
+            <d6p1:Transform z:Ref="37" i:nil="true" />
+            <d6p1:Color>
+              <d6p1:A>255</d6p1:A>
+              <d6p1:B>255</d6p1:B>
+              <d6p1:G>0</d6p1:G>
+              <d6p1:R>0</d6p1:R>
+              <d6p1:ScA>1</d6p1:ScA>
+              <d6p1:ScB>1</d6p1:ScB>
+              <d6p1:ScG>0</d6p1:ScG>
+              <d6p1:ScR>0</d6p1:ScR>
+            </d6p1:Color>
+          </ColorBrush>
+          <IsHuman>true</IsHuman>
+          <IsRequired>true</IsRequired>
+          <Name z:Id="38">You</Name>
+        </Player>
+        <Player z:Id="39">
+          <AIDll z:Ref="33" i:nil="true" />
+          <AIVersion z:Ref="34" i:nil="true" />
+          <Alliance z:Id="40">Alliance 2</Alliance>
+          <Color xmlns:d6p1="http://schemas.datacontract.org/2004/07/System.Windows.Media">
+            <d6p1:A>255</d6p1:A>
+            <d6p1:B>0</d6p1:B>
+            <d6p1:G>0</d6p1:G>
+            <d6p1:R>255</d6p1:R>
+            <d6p1:ScA>1</d6p1:ScA>
+            <d6p1:ScB>0</d6p1:ScB>
+            <d6p1:ScG>0</d6p1:ScG>
+            <d6p1:ScR>1</d6p1:ScR>
+          </Color>
+          <ColorBrush xmlns:d6p1="http://schemas.datacontract.org/2004/07/System.Windows.Media" z:Id="41">
+            <d6p1:Opacity>1</d6p1:Opacity>
+            <d6p1:RelativeTransform z:Ref="37" i:nil="true" />
+            <d6p1:Transform z:Ref="37" i:nil="true" />
+            <d6p1:Color>
+              <d6p1:A>255</d6p1:A>
+              <d6p1:B>0</d6p1:B>
+              <d6p1:G>0</d6p1:G>
+              <d6p1:R>255</d6p1:R>
+              <d6p1:ScA>1</d6p1:ScA>
+              <d6p1:ScB>0</d6p1:ScB>
+              <d6p1:ScG>0</d6p1:ScG>
+              <d6p1:ScR>1</d6p1:ScR>
+            </d6p1:Color>
+          </ColorBrush>
+          <IsHuman>false</IsHuman>
+          <IsRequired>false</IsRequired>
+          <Name z:Id="42">Player_2</Name>
+        </Player>
+        <Player i:nil="true" />
+        <Player i:nil="true" />
+      </_items>
+      <_size>2</_size>
+      <_version>2</_version>
+    </items>
+    <_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="43">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </_monitor>
+  </Players>
+  <RapidTag z:Id="44">zk:stable</RapidTag>
+  <Regions z:Id="45">
+    <items z:Id="46" z:Type="System.Collections.Generic.List`1[[CMissionLib.Region, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+      <_items z:Id="47" z:Size="4">
+        <Region z:Id="48">
+          <Areas z:Id="49">
+            <items z:Id="50" z:Type="System.Collections.Generic.List`1[[CMissionLib.Area, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="51" z:Size="0" />
+              <_size>0</_size>
+              <_version>0</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="52">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Areas>
+          <Name z:Id="53">Region 1</Name>
+        </Region>
+        <Region i:nil="true" />
+        <Region i:nil="true" />
+        <Region i:nil="true" />
+      </_items>
+      <_size>1</_size>
+      <_version>1</_version>
+    </items>
+    <_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="54">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </_monitor>
+  </Regions>
+  <ScoringMethod z:Ref="7" i:nil="true" />
+  <StartingEnergy>1000</StartingEnergy>
+  <StartingMetal>1000</StartingMetal>
+  <StartingPlayer z:Ref="32" i:nil="true" />
+  <Triggers z:Id="55">
+    <items z:Id="56" z:Type="System.Collections.Generic.List`1[[CMissionLib.Trigger, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+      <_items z:Id="57" z:Size="8">
+        <Trigger z:Id="58">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="59">
+            <items z:Id="60" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="61" z:Size="8">
+                <TriggerLogic z:Id="62" z:Type="CMissionLib.Conditions.GameStartedCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="63">Game Starts</Name>
+                </TriggerLogic>
+                <TriggerLogic z:Id="64" z:Type="CMissionLib.Actions.CreateUnitsAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="65">Create Units</Name>
+                  <CEG i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
+                  <Units xmlns:d10p1="http://schemas.datacontract.org/2004/07/CMissionLib" z:Id="66" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">
+                    <d10p1:items z:Id="67" z:Type="System.Collections.Generic.List`1[[CMissionLib.UnitStartInfo, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+                      <d10p1:_items z:Id="68" z:Size="32">
+                        <d10p1:UnitStartInfo z:Id="69">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>176</d14p1:_x>
+                            <d14p1:_y>368</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>176</d10p1:X>
+                          <d10p1:Y>368</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="70">
+                            <d14p1:items z:Id="71" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="72" z:Size="4">
+                                <d14p1:string z:Id="73">mex1</d14p1:string>
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                              </d14p1:_items>
+                              <d14p1:_size>1</d14p1:_size>
+                              <d14p1:_version>1</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="74">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>true</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="32" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="75">cormex</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="76">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>136</d14p1:_x>
+                            <d14p1:_y>420</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>136</d10p1:X>
+                          <d10p1:Y>420</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="77">
+                            <d14p1:items z:Id="78" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="79" z:Size="4">
+                                <d14p1:string z:Id="80">solar1</d14p1:string>
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                              </d14p1:_items>
+                              <d14p1:_size>1</d14p1:_size>
+                              <d14p1:_version>1</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="81">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>true</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="32" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="82">corsolar</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="83">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>124</d14p1:_x>
+                            <d14p1:_y>484</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>124</d10p1:X>
+                          <d10p1:Y>484</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="84">
+                            <d14p1:items z:Id="85" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="86" z:Size="4">
+                                <d14p1:string z:Id="87">wind2</d14p1:string>
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                              </d14p1:_items>
+                              <d14p1:_size>1</d14p1:_size>
+                              <d14p1:_version>1</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="88">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>true</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="32" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="89">corwin</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="90">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>176</d14p1:_x>
+                            <d14p1:_y>528</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>176</d10p1:X>
+                          <d10p1:Y>528</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="91">
+                            <d14p1:items z:Id="92" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="93" z:Size="4">
+                                <d14p1:string z:Id="94">kbotlab</d14p1:string>
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                              </d14p1:_items>
+                              <d14p1:_size>1</d14p1:_size>
+                              <d14p1:_version>1</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="95">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>359.72198566216946</d10p1:Heading>
+                          <d10p1:IsGhost>true</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="32" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="96">corlab</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="97">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>196</d14p1:_x>
+                            <d14p1:_y>352</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>196</d10p1:X>
+                          <d10p1:Y>352</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="98">
+                            <d14p1:items z:Id="99" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="100" z:Size="4">
+                                <d14p1:string z:Id="101">boi</d14p1:string>
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                                <d14p1:string i:nil="true" />
+                              </d14p1:_items>
+                              <d14p1:_size>1</d14p1:_size>
+                              <d14p1:_version>1</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="102">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="32" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="103">corcom</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="104">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>548</d14p1:_x>
+                            <d14p1:_y>356</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>548</d10p1:X>
+                          <d10p1:Y>356</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="105">
+                            <d14p1:items z:Id="106" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Ref="5" i:nil="true" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="107">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="108">armadvsol</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="109">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>556</d14p1:_x>
+                            <d14p1:_y>380</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>556</d10p1:X>
+                          <d10p1:Y>380</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="110">
+                            <d14p1:items z:Id="111" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Ref="5" i:nil="true" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="112">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Ref="108" i:nil="true" />
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="113">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>564</d14p1:_x>
+                            <d14p1:_y>412</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>564</d10p1:X>
+                          <d10p1:Y>412</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="114">
+                            <d14p1:items z:Id="115" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Ref="5" i:nil="true" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="116">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="117">armap</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="118">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>580</d14p1:_x>
+                            <d14p1:_y>332</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>580</d10p1:X>
+                          <d10p1:Y>332</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="119">
+                            <d14p1:items z:Id="120" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Ref="5" i:nil="true" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="121">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="122">armnanotc</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="123">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>572</d14p1:_x>
+                            <d14p1:_y>352</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>572</d10p1:X>
+                          <d10p1:Y>352</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="124">
+                            <d14p1:items z:Id="125" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="126" z:Size="0" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="127">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="128">armarad</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo z:Id="129">
+                          <d10p1:Point xmlns:d14p1="http://schemas.datacontract.org/2004/07/System.Windows">
+                            <d14p1:_x>560</d14p1:_x>
+                            <d14p1:_y>364</d14p1:_y>
+                          </d10p1:Point>
+                          <d10p1:X>560</d10p1:X>
+                          <d10p1:Y>364</d10p1:Y>
+                          <d10p1:Groups xmlns:d14p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="130">
+                            <d14p1:items z:Id="131" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                              <d14p1:_items z:Id="132" z:Size="0" />
+                              <d14p1:_size>0</d14p1:_size>
+                              <d14p1:_version>0</d14p1:_version>
+                            </d14p1:items>
+                            <d14p1:_monitor xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="133">
+                              <d15p1:_busyCount>0</d15p1:_busyCount>
+                            </d14p1:_monitor>
+                          </d10p1:Groups>
+                          <d10p1:Heading>0</d10p1:Heading>
+                          <d10p1:IsGhost>false</d10p1:IsGhost>
+                          <d10p1:Player z:Ref="39" i:nil="true" />
+                          <d10p1:UnitDefName z:Id="134">corllt</d10p1:UnitDefName>
+                        </d10p1:UnitStartInfo>
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                        <d10p1:UnitStartInfo i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>11</d10p1:_size>
+                      <d10p1:_version>49</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="135">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Units>
+                  <UseOrbitalDrop xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</UseOrbitalDrop>
+                </TriggerLogic>
+                <TriggerLogic z:Id="136" z:Type="CMissionLib.Actions.GuiMessageAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="137">GUI Message</Name>
+                  <FontSize xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">14</FontSize>
+                  <Height xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">300</Height>
+                  <ImagePath i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
+                  <Message z:Id="138" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Your commander is a strong unit and can also build many things. In this tutorial your commander is surrounded by 'ghost' units - build these on the spots indicated and follow the instructions to make yourself a base. Begin by selecting your commander and right clicking to move him.</Message>
+                  <Pause xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">true</Pause>
+                  <Width xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">400</Width>
+                </TriggerLogic>
+                <TriggerLogic z:Id="139" z:Type="CMissionLib.Actions.LockUnitsAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="140">Lock Units</Name>
+                  <Units xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="141" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">
+                    <d10p1:items z:Id="142" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Id="143" z:Size="512">
+                        <d10p1:string z:Id="144">armacsub</d10p1:string>
+                        <d10p1:string z:Id="145">aafus</d10p1:string>
+                        <d10p1:string z:Id="146">ajuno</d10p1:string>
+                        <d10p1:string z:Id="147">amgeo</d10p1:string>
+                        <d10p1:string z:Id="148">armaak</d10p1:string>
+                        <d10p1:string z:Id="149">armaap</d10p1:string>
+                        <d10p1:string z:Id="150">armaas</d10p1:string>
+                        <d10p1:string z:Id="151">armaca</d10p1:string>
+                        <d10p1:string z:Id="152">armack</d10p1:string>
+                        <d10p1:string z:Id="153">armacv</d10p1:string>
+                        <d10p1:string z:Id="154">armadvsol</d10p1:string>
+                        <d10p1:string z:Id="155">armah</d10p1:string>
+                        <d10p1:string z:Id="156">armalab</d10p1:string>
+                        <d10p1:string z:Id="157">armamb</d10p1:string>
+                        <d10p1:string z:Id="158">armamd</d10p1:string>
+                        <d10p1:string z:Id="159">armamex</d10p1:string>
+                        <d10p1:string z:Id="160">armamph</d10p1:string>
+                        <d10p1:string z:Id="161">armanac</d10p1:string>
+                        <d10p1:string z:Id="162">armanni</d10p1:string>
+                        <d10p1:string z:Id="163">armap</d10p1:string>
+                        <d10p1:string z:Id="164">armarad</d10p1:string>
+                        <d10p1:string z:Id="165">armaser</d10p1:string>
+                        <d10p1:string z:Id="166">armason</d10p1:string>
+                        <d10p1:string z:Id="167">armasp</d10p1:string>
+                        <d10p1:string z:Id="168">armasy</d10p1:string>
+                        <d10p1:string z:Id="169">armatl</d10p1:string>
+                        <d10p1:string z:Id="170">armatlas</d10p1:string>
+                        <d10p1:string z:Id="171">armavp</d10p1:string>
+                        <d10p1:string z:Id="172">armawac</d10p1:string>
+                        <d10p1:string z:Id="173">armbanth</d10p1:string>
+                        <d10p1:string z:Id="174">armbats</d10p1:string>
+                        <d10p1:string z:Id="175">armbeaver</d10p1:string>
+                        <d10p1:string z:Id="176">armbrawl</d10p1:string>
+                        <d10p1:string z:Id="177">armbrtha</d10p1:string>
+                        <d10p1:string z:Id="178">armbull</d10p1:string>
+                        <d10p1:string z:Id="179">armca</d10p1:string>
+                        <d10p1:string z:Id="180">armcarry</d10p1:string>
+                        <d10p1:string z:Id="181">armch</d10p1:string>
+                        <d10p1:string z:Id="182">armcir</d10p1:string>
+                        <d10p1:string z:Id="183">armck</d10p1:string>
+                        <d10p1:string z:Id="184">armckfus</d10p1:string>
+                        <d10p1:string z:Id="185">armclaw</d10p1:string>
+                        <d10p1:string z:Id="186">armcom</d10p1:string>
+                        <d10p1:string z:Id="187">armcroc</d10p1:string>
+                        <d10p1:string z:Id="188">armcrus</d10p1:string>
+                        <d10p1:string z:Id="189">armcs</d10p1:string>
+                        <d10p1:string z:Id="190">armcsa</d10p1:string>
+                        <d10p1:string z:Id="191">armcv</d10p1:string>
+                        <d10p1:string z:Id="192">armcybr</d10p1:string>
+                        <d10p1:string z:Id="193">armdecom</d10p1:string>
+                        <d10p1:string z:Id="194">armdf</d10p1:string>
+                        <d10p1:string z:Id="195">armdfly</d10p1:string>
+                        <d10p1:string z:Id="196">armdl</d10p1:string>
+                        <d10p1:string z:Id="197">armdrag</d10p1:string>
+                        <d10p1:string z:Id="198">armemp</d10p1:string>
+                        <d10p1:string z:Id="199">armestor</d10p1:string>
+                        <d10p1:string z:Id="200">armeyes</d10p1:string>
+                        <d10p1:string z:Id="201">armfark</d10p1:string>
+                        <d10p1:string z:Id="202">armfast</d10p1:string>
+                        <d10p1:string z:Id="203">armfatf</d10p1:string>
+                        <d10p1:string z:Id="204">armfav</d10p1:string>
+                        <d10p1:string z:Id="205">armfboy</d10p1:string>
+                        <d10p1:string z:Id="206">armfdrag</d10p1:string>
+                        <d10p1:string z:Id="207">armfflak</d10p1:string>
+                        <d10p1:string z:Id="208">armfhlt</d10p1:string>
+                        <d10p1:string z:Id="209">armfhp</d10p1:string>
+                        <d10p1:string z:Id="210">armfido</d10p1:string>
+                        <d10p1:string z:Id="211">armfig</d10p1:string>
+                        <d10p1:string z:Id="212">armflak</d10p1:string>
+                        <d10p1:string z:Id="213">armflash</d10p1:string>
+                        <d10p1:string z:Id="214">armflea</d10p1:string>
+                        <d10p1:string z:Id="215">armfmine3</d10p1:string>
+                        <d10p1:string z:Id="216">armfmkr</d10p1:string>
+                        <d10p1:string z:Id="217">armfort</d10p1:string>
+                        <d10p1:string z:Id="218">armfrad</d10p1:string>
+                        <d10p1:string z:Id="219">armfrt</d10p1:string>
+                        <d10p1:string z:Id="220">armfus</d10p1:string>
+                        <d10p1:string z:Id="221">armgate</d10p1:string>
+                        <d10p1:string z:Id="222">armgeo</d10p1:string>
+                        <d10p1:string z:Id="223">armgmm</d10p1:string>
+                        <d10p1:string z:Id="224">armguard</d10p1:string>
+                        <d10p1:string z:Id="225">armham</d10p1:string>
+                        <d10p1:string z:Id="226">armhawk</d10p1:string>
+                        <d10p1:string z:Id="227">armhlt</d10p1:string>
+                        <d10p1:string z:Id="228">armhp</d10p1:string>
+                        <d10p1:string z:Id="229">armjam</d10p1:string>
+                        <d10p1:string z:Id="230">armjamt</d10p1:string>
+                        <d10p1:string z:Id="231">armjanus</d10p1:string>
+                        <d10p1:string z:Id="232">armjeth</d10p1:string>
+                        <d10p1:string z:Id="233">armkam</d10p1:string>
+                        <d10p1:string z:Id="234">armlab</d10p1:string>
+                        <d10p1:string z:Id="235">armlance</d10p1:string>
+                        <d10p1:string z:Id="236">armlatnk</d10p1:string>
+                        <d10p1:string z:Id="237">armllt</d10p1:string>
+                        <d10p1:string z:Id="238">armmakr</d10p1:string>
+                        <d10p1:string z:Id="239">armmanni</d10p1:string>
+                        <d10p1:string z:Id="240">armmark</d10p1:string>
+                        <d10p1:string z:Id="241">armmart</d10p1:string>
+                        <d10p1:string z:Id="242">armmav</d10p1:string>
+                        <d10p1:string z:Id="243">armmerl</d10p1:string>
+                        <d10p1:string z:Id="244">armmex</d10p1:string>
+                        <d10p1:string z:Id="245">armmh</d10p1:string>
+                        <d10p1:string z:Id="246">armmine1</d10p1:string>
+                        <d10p1:string z:Id="247">armmine2</d10p1:string>
+                        <d10p1:string z:Id="248">armmine3</d10p1:string>
+                        <d10p1:string z:Id="249">armmls</d10p1:string>
+                        <d10p1:string z:Id="250">armmlv</d10p1:string>
+                        <d10p1:string z:Id="251">armmmkr</d10p1:string>
+                        <d10p1:string z:Id="252">armmoho</d10p1:string>
+                        <d10p1:string z:Id="253">armmship</d10p1:string>
+                        <d10p1:string z:Id="254">armmstor</d10p1:string>
+                        <d10p1:string z:Id="255">armnanotc</d10p1:string>
+                        <d10p1:string z:Id="256">armorco</d10p1:string>
+                        <d10p1:string z:Id="257">armpb</d10p1:string>
+                        <d10p1:string z:Id="258">armpeep</d10p1:string>
+                        <d10p1:string z:Id="259">armpincer</d10p1:string>
+                        <d10p1:string z:Id="260">armplat</d10p1:string>
+                        <d10p1:string z:Id="261">armpnix</d10p1:string>
+                        <d10p1:string z:Id="262">armpt</d10p1:string>
+                        <d10p1:string z:Id="263">armpw</d10p1:string>
+                        <d10p1:string z:Id="264">armrad</d10p1:string>
+                        <d10p1:string z:Id="265">armraven</d10p1:string>
+                        <d10p1:string z:Id="266">armraz</d10p1:string>
+                        <d10p1:string z:Id="267">armrecl</d10p1:string>
+                        <d10p1:string z:Id="268">armrectr</d10p1:string>
+                        <d10p1:string z:Id="269">armrl</d10p1:string>
+                        <d10p1:string z:Id="270">armrock</d10p1:string>
+                        <d10p1:string z:Id="271">armroy</d10p1:string>
+                        <d10p1:string z:Id="272">armsaber</d10p1:string>
+                        <d10p1:string z:Id="273">armsam</d10p1:string>
+                        <d10p1:string z:Id="274">armsb</d10p1:string>
+                        <d10p1:string z:Id="275">armscab</d10p1:string>
+                        <d10p1:string z:Id="276">armsd</d10p1:string>
+                        <d10p1:string z:Id="277">armseap</d10p1:string>
+                        <d10p1:string z:Id="278">armseer</d10p1:string>
+                        <d10p1:string z:Id="279">armsehak</d10p1:string>
+                        <d10p1:string z:Id="280">armsfig</d10p1:string>
+                        <d10p1:string z:Id="281">armsh</d10p1:string>
+                        <d10p1:string z:Id="282">armshltx</d10p1:string>
+                        <d10p1:string z:Id="283">armshock</d10p1:string>
+                        <d10p1:string z:Id="284">armsilo</d10p1:string>
+                        <d10p1:string z:Id="285">armsjam</d10p1:string>
+                        <d10p1:string z:Id="286">armsl</d10p1:string>
+                        <d10p1:string z:Id="287">armsnipe</d10p1:string>
+                        <d10p1:string z:Id="288">armsolar</d10p1:string>
+                        <d10p1:string z:Id="289">armsonar</d10p1:string>
+                        <d10p1:string z:Id="290">armspid</d10p1:string>
+                        <d10p1:string z:Id="291">armsptk</d10p1:string>
+                        <d10p1:string z:Id="292">armspy</d10p1:string>
+                        <d10p1:string z:Id="293">armst</d10p1:string>
+                        <d10p1:string z:Id="294">armstump</d10p1:string>
+                        <d10p1:string z:Id="295">armsub</d10p1:string>
+                        <d10p1:string z:Id="296">armsubk</d10p1:string>
+                        <d10p1:string z:Id="297">armsy</d10p1:string>
+                        <d10p1:string z:Id="298">armtarg</d10p1:string>
+                        <d10p1:string z:Id="299">armthovr</d10p1:string>
+                        <d10p1:string z:Id="300">armthund</d10p1:string>
+                        <d10p1:string z:Id="301">armtide</d10p1:string>
+                        <d10p1:string z:Id="302">armtl</d10p1:string>
+                        <d10p1:string z:Id="303">armtship</d10p1:string>
+                        <d10p1:string z:Id="304">armuwadves</d10p1:string>
+                        <d10p1:string z:Id="305">armuwadvms</d10p1:string>
+                        <d10p1:string z:Id="306">armuwes</d10p1:string>
+                        <d10p1:string z:Id="307">armuwfus</d10p1:string>
+                        <d10p1:string z:Id="308">armuwmex</d10p1:string>
+                        <d10p1:string z:Id="309">armuwmme</d10p1:string>
+                        <d10p1:string z:Id="310">armuwmmm</d10p1:string>
+                        <d10p1:string z:Id="311">armuwms</d10p1:string>
+                        <d10p1:string z:Id="312">armvader</d10p1:string>
+                        <d10p1:string z:Id="313">armveil</d10p1:string>
+                        <d10p1:string z:Id="314">armvp</d10p1:string>
+                        <d10p1:string z:Id="315">armvulc</d10p1:string>
+                        <d10p1:string z:Id="316">armwar</d10p1:string>
+                        <d10p1:string z:Id="317">armwin</d10p1:string>
+                        <d10p1:string z:Id="318">armyork</d10p1:string>
+                        <d10p1:string z:Id="319">armzeus</d10p1:string>
+                        <d10p1:string z:Id="320">aseadragon</d10p1:string>
+                        <d10p1:string z:Id="321">asubpen</d10p1:string>
+                        <d10p1:string z:Id="322">blade</d10p1:string>
+                        <d10p1:string z:Id="323">bladew</d10p1:string>
+                        <d10p1:string z:Id="324">cafus</d10p1:string>
+                        <d10p1:string z:Id="325">cjuno</d10p1:string>
+                        <d10p1:string z:Id="326">cmgeo</d10p1:string>
+                        <d10p1:string z:Id="327">commando</d10p1:string>
+                        <d10p1:string z:Id="328">consul</d10p1:string>
+                        <d10p1:string z:Id="329">coraak</d10p1:string>
+                        <d10p1:string z:Id="330">coraap</d10p1:string>
+                        <d10p1:string z:Id="331">coraca</d10p1:string>
+                        <d10p1:string z:Id="332">corack</d10p1:string>
+                        <d10p1:string z:Id="333">coracsub</d10p1:string>
+                        <d10p1:string z:Id="334">coracv</d10p1:string>
+                        <d10p1:string z:Id="335">coradvsol</d10p1:string>
+                        <d10p1:string z:Id="336">corah</d10p1:string>
+                        <d10p1:string z:Id="337">coralab</d10p1:string>
+                        <d10p1:string z:Id="338">coramph</d10p1:string>
+                        <d10p1:string z:Id="339">corap</d10p1:string>
+                        <d10p1:string z:Id="340">corape</d10p1:string>
+                        <d10p1:string z:Id="341">corarad</d10p1:string>
+                        <d10p1:string z:Id="342">corarch</d10p1:string>
+                        <d10p1:string z:Id="343">corason</d10p1:string>
+                        <d10p1:string z:Id="344">corasp</d10p1:string>
+                        <d10p1:string z:Id="345">corasy</d10p1:string>
+                        <d10p1:string z:Id="346">coratl</d10p1:string>
+                        <d10p1:string z:Id="347">coravp</d10p1:string>
+                        <d10p1:string z:Id="348">corawac</d10p1:string>
+                        <d10p1:string z:Id="349">corbats</d10p1:string>
+                        <d10p1:string z:Id="350">corbhmth</d10p1:string>
+                        <d10p1:string z:Id="351">corblackhy</d10p1:string>
+                        <d10p1:string z:Id="352">corbuzz</d10p1:string>
+                        <d10p1:string z:Id="353">corca</d10p1:string>
+                        <d10p1:string z:Id="354">corcan</d10p1:string>
+                        <d10p1:string z:Id="355">corcarry</d10p1:string>
+                        <d10p1:string z:Id="356">corch</d10p1:string>
+                        <d10p1:string z:Id="357">corck</d10p1:string>
+                        <d10p1:string z:Id="358">corcom</d10p1:string>
+                        <d10p1:string z:Id="359">corcrash</d10p1:string>
+                        <d10p1:string z:Id="360">corcrus</d10p1:string>
+                        <d10p1:string z:Id="361">corcrw</d10p1:string>
+                        <d10p1:string z:Id="362">corcs</d10p1:string>
+                        <d10p1:string z:Id="363">corcsa</d10p1:string>
+                        <d10p1:string z:Id="364">corcut</d10p1:string>
+                        <d10p1:string z:Id="365">corcv</d10p1:string>
+                        <d10p1:string z:Id="366">cordecom</d10p1:string>
+                        <d10p1:string z:Id="367">cordl</d10p1:string>
+                        <d10p1:string z:Id="368">cordoom</d10p1:string>
+                        <d10p1:string z:Id="369">cordrag</d10p1:string>
+                        <d10p1:string z:Id="370">corenaa</d10p1:string>
+                        <d10p1:string z:Id="371">corerad</d10p1:string>
+                        <d10p1:string z:Id="372">corestor</d10p1:string>
+                        <d10p1:string z:Id="373">coresupp</d10p1:string>
+                        <d10p1:string z:Id="374">coreter</d10p1:string>
+                        <d10p1:string z:Id="375">corexp</d10p1:string>
+                        <d10p1:string z:Id="376">coreyes</d10p1:string>
+                        <d10p1:string z:Id="377">corfast</d10p1:string>
+                        <d10p1:string z:Id="378">corfatf</d10p1:string>
+                        <d10p1:string z:Id="379">corfav</d10p1:string>
+                        <d10p1:string z:Id="380">corfdrag</d10p1:string>
+                        <d10p1:string z:Id="381">corfhlt</d10p1:string>
+                        <d10p1:string z:Id="382">corfhp</d10p1:string>
+                        <d10p1:string z:Id="383">corfink</d10p1:string>
+                        <d10p1:string z:Id="384">corflak</d10p1:string>
+                        <d10p1:string z:Id="385">corfmd</d10p1:string>
+                        <d10p1:string z:Id="386">corfmine3</d10p1:string>
+                        <d10p1:string z:Id="387">corfmkr</d10p1:string>
+                        <d10p1:string z:Id="388">corfort</d10p1:string>
+                        <d10p1:string z:Id="389">corfrad</d10p1:string>
+                        <d10p1:string z:Id="390">corfrt</d10p1:string>
+                        <d10p1:string z:Id="391">corfus</d10p1:string>
+                        <d10p1:string z:Id="392">corgant</d10p1:string>
+                        <d10p1:string z:Id="393">corgarp</d10p1:string>
+                        <d10p1:string z:Id="394">corgate</d10p1:string>
+                        <d10p1:string z:Id="395">corgator</d10p1:string>
+                        <d10p1:string z:Id="396">corgeo</d10p1:string>
+                        <d10p1:string z:Id="397">corgol</d10p1:string>
+                        <d10p1:string z:Id="398">corgripn</d10p1:string>
+                        <d10p1:string z:Id="399">corhlt</d10p1:string>
+                        <d10p1:string z:Id="400">corhp</d10p1:string>
+                        <d10p1:string z:Id="401">corhrk</d10p1:string>
+                        <d10p1:string z:Id="402">corhunt</d10p1:string>
+                        <d10p1:string z:Id="403">corhurc</d10p1:string>
+                        <d10p1:string z:Id="404">corint</d10p1:string>
+                        <d10p1:string z:Id="405">corjamt</d10p1:string>
+                        <d10p1:string z:Id="406">corkarg</d10p1:string>
+                        <d10p1:string z:Id="407">corkrog</d10p1:string>
+                        <d10p1:string z:Id="408">corlevlr</d10p1:string>
+                        <d10p1:string z:Id="409">cormabm</d10p1:string>
+                        <d10p1:string z:Id="410">cormakr</d10p1:string>
+                        <d10p1:string z:Id="411">cormart</d10p1:string>
+                        <d10p1:string z:Id="412">cormaw</d10p1:string>
+                        <d10p1:string z:Id="413">cormexp</d10p1:string>
+                        <d10p1:string z:Id="414">cormh</d10p1:string>
+                        <d10p1:string z:Id="415">cormine1</d10p1:string>
+                        <d10p1:string z:Id="416">cormine2</d10p1:string>
+                        <d10p1:string z:Id="417">cormine3</d10p1:string>
+                        <d10p1:string z:Id="418">cormist</d10p1:string>
+                        <d10p1:string z:Id="419">cormls</d10p1:string>
+                        <d10p1:string z:Id="420">cormlv</d10p1:string>
+                        <d10p1:string z:Id="421">cormmkr</d10p1:string>
+                        <d10p1:string z:Id="422">cormoho</d10p1:string>
+                        <d10p1:string z:Id="423">cormort</d10p1:string>
+                        <d10p1:string z:Id="424">cormship</d10p1:string>
+                        <d10p1:string z:Id="425">cormstor</d10p1:string>
+                        <d10p1:string z:Id="426">cormuskrat</d10p1:string>
+                        <d10p1:string z:Id="427">cornanotc</d10p1:string>
+                        <d10p1:string z:Id="428">corparrow</d10p1:string>
+                        <d10p1:string z:Id="429">corplat</d10p1:string>
+                        <d10p1:string z:Id="430">corpt</d10p1:string>
+                        <d10p1:string z:Id="431">corpun</d10p1:string>
+                        <d10p1:string z:Id="432">corpyro</d10p1:string>
+                        <d10p1:string z:Id="433">corraid</d10p1:string>
+                        <d10p1:string z:Id="434">correap</d10p1:string>
+                        <d10p1:string z:Id="435">correcl</d10p1:string>
+                        <d10p1:string z:Id="436">corrl</d10p1:string>
+                        <d10p1:string z:Id="437">corroach</d10p1:string>
+                        <d10p1:string z:Id="438">corroy</d10p1:string>
+                        <d10p1:string z:Id="439">corsb</d10p1:string>
+                        <d10p1:string z:Id="440">corsd</d10p1:string>
+                        <d10p1:string z:Id="441">corseal</d10p1:string>
+                        <d10p1:string z:Id="442">corseap</d10p1:string>
+                        <d10p1:string z:Id="443">corsent</d10p1:string>
+                        <d10p1:string z:Id="444">corsfig</d10p1:string>
+                        <d10p1:string z:Id="445">corsh</d10p1:string>
+                        <d10p1:string z:Id="446">corshad</d10p1:string>
+                        <d10p1:string z:Id="447">corshark</d10p1:string>
+                        <d10p1:string z:Id="448">corshroud</d10p1:string>
+                        <d10p1:string z:Id="449">corsilo</d10p1:string>
+                        <d10p1:string z:Id="450">corsjam</d10p1:string>
+                        <d10p1:string z:Id="451">corsktl</d10p1:string>
+                        <d10p1:string z:Id="452">corsnap</d10p1:string>
+                        <d10p1:string z:Id="453">corsonar</d10p1:string>
+                        <d10p1:string z:Id="454">corspec</d10p1:string>
+                        <d10p1:string z:Id="455">corspy</d10p1:string>
+                        <d10p1:string z:Id="456">corssub</d10p1:string>
+                        <d10p1:string z:Id="457">corsub</d10p1:string>
+                        <d10p1:string z:Id="458">corsumo</d10p1:string>
+                        <d10p1:string z:Id="459">corsy</d10p1:string>
+                        <d10p1:string z:Id="460">cortarg</d10p1:string>
+                        <d10p1:string z:Id="461">cortermite</d10p1:string>
+                        <d10p1:string z:Id="462">corthovr</d10p1:string>
+                        <d10p1:string z:Id="463">cortide</d10p1:string>
+                        <d10p1:string z:Id="464">cortitan</d10p1:string>
+                        <d10p1:string z:Id="465">cortl</d10p1:string>
+                        <d10p1:string z:Id="466">cortoast</d10p1:string>
+                        <d10p1:string z:Id="467">cortron</d10p1:string>
+                        <d10p1:string z:Id="468">cortship</d10p1:string>
+                        <d10p1:string z:Id="469">coruwadves</d10p1:string>
+                        <d10p1:string z:Id="470">coruwadvms</d10p1:string>
+                        <d10p1:string z:Id="471">coruwes</d10p1:string>
+                        <d10p1:string z:Id="472">coruwfus</d10p1:string>
+                        <d10p1:string z:Id="473">coruwmex</d10p1:string>
+                        <d10p1:string z:Id="474">coruwmme</d10p1:string>
+                        <d10p1:string z:Id="475">coruwmmm</d10p1:string>
+                        <d10p1:string z:Id="476">coruwms</d10p1:string>
+                        <d10p1:string z:Id="477">corvalk</d10p1:string>
+                        <d10p1:string z:Id="478">corvamp</d10p1:string>
+                        <d10p1:string z:Id="479">corveng</d10p1:string>
+                        <d10p1:string z:Id="480">corvipe</d10p1:string>
+                        <d10p1:string z:Id="481">corvoyr</d10p1:string>
+                        <d10p1:string z:Id="482">corvp</d10p1:string>
+                        <d10p1:string z:Id="483">corvrad</d10p1:string>
+                        <d10p1:string z:Id="484">corvroc</d10p1:string>
+                        <d10p1:string z:Id="485">corwolv</d10p1:string>
+                        <d10p1:string z:Id="486">csubpen</d10p1:string>
+                        <d10p1:string z:Id="487">decade</d10p1:string>
+                        <d10p1:string z:Id="488">gorg</d10p1:string>
+                        <d10p1:string z:Id="489">intruder</d10p1:string>
+                        <d10p1:string z:Id="490">krogtaar</d10p1:string>
+                        <d10p1:string z:Id="491">madsam</d10p1:string>
+                        <d10p1:string z:Id="492">marauder</d10p1:string>
+                        <d10p1:string z:Id="493">mercury</d10p1:string>
+                        <d10p1:string z:Id="494">nsaclash</d10p1:string>
+                        <d10p1:string z:Id="495">packo</d10p1:string>
+                        <d10p1:string z:Id="496">screamer</d10p1:string>
+                        <d10p1:string z:Id="497">shiva</d10p1:string>
+                        <d10p1:string z:Id="498">tawf001</d10p1:string>
+                        <d10p1:string z:Id="499">tawf009</d10p1:string>
+                        <d10p1:string z:Id="500">tawf013</d10p1:string>
+                        <d10p1:string z:Id="501">tawf114</d10p1:string>
+                        <d10p1:string z:Id="502">trem</d10p1:string>
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>359</d10p1:_size>
+                      <d10p1:_version>381</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="503">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Units>
+                </TriggerLogic>
+                <TriggerLogic z:Id="504" z:Type="CMissionLib.Actions.SetCameraUnitTargetAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="505">Unit Camera</Name>
+                  <Group z:Ref="101" i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
+                </TriggerLogic>
+                <TriggerLogic z:Id="506" z:Type="CMissionLib.Actions.SetCameraUnitTargetAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="507">Unit Camera</Name>
+                  <Group z:Ref="101" i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>6</_size>
+              <_version>14</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="508">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="509">Trigger</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="510">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="511">
+            <items z:Id="512" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="513" z:Size="4">
+                <TriggerLogic z:Id="514" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="515">Marker</Name>
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="516" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Use your commander to build a mex here.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">169.29000000000002</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">367.28999999999996</Y>
+                </TriggerLogic>
+                <TriggerLogic z:Id="517" z:Type="CMissionLib.Conditions.UnitsAreInAreaCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="518">Units Are In Area</Name>
+                  <Areas xmlns:d10p1="http://schemas.datacontract.org/2004/07/CMissionLib" z:Id="519" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="520" z:Type="System.Collections.Generic.List`1[[CMissionLib.Area, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+                      <d10p1:_items z:Id="521" z:Size="8">
+                        <d10p1:Area z:Id="522" z:Type="CMissionLib.RectangularArea" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                          <d10p1:Height>16.830000000000041</d10p1:Height>
+                          <d10p1:Width>28.710000000000036</d10p1:Width>
+                          <d10p1:X>186.12000000000012</d10p1:X>
+                          <d10p1:Y>334.62</d10p1:Y>
+                        </d10p1:Area>
+                        <d10p1:Area z:Id="523" z:Type="CMissionLib.RectangularArea" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                          <d10p1:Height>25.740000000000009</d10p1:Height>
+                          <d10p1:Width>17.819999999999936</d10p1:Width>
+                          <d10p1:X>201.96000000000004</d10p1:X>
+                          <d10p1:Y>340.55999999999995</d10p1:Y>
+                        </d10p1:Area>
+                        <d10p1:Area z:Id="524" z:Type="CMissionLib.RectangularArea" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                          <d10p1:Height>0</d10p1:Height>
+                          <d10p1:Width>0</d10p1:Width>
+                          <d10p1:X>192.06000000000017</d10p1:X>
+                          <d10p1:Y>363.33000000000004</d10p1:Y>
+                        </d10p1:Area>
+                        <d10p1:Area z:Id="525" z:Type="CMissionLib.RectangularArea" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                          <d10p1:Height>17.82000000000005</d10p1:Height>
+                          <d10p1:Width>33.660000000000082</d10p1:Width>
+                          <d10p1:X>178.20000000000005</d10p1:X>
+                          <d10p1:Y>356.4</d10p1:Y>
+                        </d10p1:Area>
+                        <d10p1:Area z:Id="526" z:Type="CMissionLib.RectangularArea" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                          <d10p1:Height>28.709999999999923</d10p1:Height>
+                          <d10p1:Width>20.789999999999964</d10p1:Width>
+                          <d10p1:X>175.23000000000002</d10p1:X>
+                          <d10p1:Y>337.59000000000003</d10p1:Y>
+                        </d10p1:Area>
+                        <d10p1:Area i:nil="true" />
+                        <d10p1:Area i:nil="true" />
+                        <d10p1:Area i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>5</d10p1:_size>
+                      <d10p1:_version>11</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="527">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Areas>
+                  <Groups xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="528" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="529" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Ref="5" i:nil="true" />
+                      <d10p1:_size>0</d10p1:_size>
+                      <d10p1:_version>0</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="530">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Groups>
+                  <Number xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">1</Number>
+                  <Players xmlns:d10p1="http://schemas.datacontract.org/2004/07/CMissionLib" z:Id="531" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="532" z:Type="System.Collections.Generic.List`1[[CMissionLib.Player, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+                      <d10p1:_items z:Id="533" z:Size="4">
+                        <d10p1:Player z:Ref="32" i:nil="true" />
+                        <d10p1:Player i:nil="true" />
+                        <d10p1:Player i:nil="true" />
+                        <d10p1:Player i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>1</d10p1:_size>
+                      <d10p1:_version>1</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="534">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Players>
+                </TriggerLogic>
+                <TriggerLogic z:Id="535" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="536" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">The grey spots on the ground are metal spots. </Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">134.64</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">334.62</Y>
+                </TriggerLogic>
+                <TriggerLogic z:Id="537" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="538" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">You can build metal extractors (mexes) on them to increase your metal income.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">146.51999999999998</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">356.4</Y>
+                </TriggerLogic>
+              </_items>
+              <_size>4</_size>
+              <_version>6</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="539">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="540">Trigger 6</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="541">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="542">
+            <items z:Id="543" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="544" z:Size="4">
+                <TriggerLogic z:Id="545" z:Type="CMissionLib.Conditions.UnitBuiltOnGhostCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="546">Unit Built On Ghost</Name>
+                  <Groups xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="547" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="548" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Id="549" z:Size="4">
+                        <d10p1:string z:Ref="73" i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>1</d10p1:_size>
+                      <d10p1:_version>1</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="550">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Groups>
+                </TriggerLogic>
+                <TriggerLogic z:Id="551" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">true</CenterCamera>
+                  <Text z:Id="552" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Build a solar collector here</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">111.87</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">423.71999999999997</Y>
+                </TriggerLogic>
+                <TriggerLogic z:Id="553" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="554" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">The other resource you'll need is energy.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">108.89999999999998</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">404.90999999999997</Y>
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>3</_size>
+              <_version>13</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="555">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="556">Trigger 1</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="557">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="558">
+            <items z:Id="559" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="560" z:Size="4">
+                <TriggerLogic z:Id="561" z:Type="CMissionLib.Conditions.UnitBuiltOnGhostCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="546" i:nil="true" />
+                  <Groups xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="562" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="563" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Id="564" z:Size="4">
+                        <d10p1:string z:Ref="80" i:nil="true" />
+                        <d10p1:string z:Id="565">solar2</d10p1:string>
+                        <d10p1:string z:Id="566">wind1</d10p1:string>
+                        <d10p1:string i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>3</d10p1:_size>
+                      <d10p1:_version>5</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="567">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Groups>
+                </TriggerLogic>
+                <TriggerLogic z:Id="568" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="569" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">....and build a wind generator here.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">110.88</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">480.15</Y>
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>2</_size>
+              <_version>2</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="570">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="571">Trigger 2</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="572">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="573">
+            <items z:Id="574" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="575" z:Size="4">
+                <TriggerLogic z:Id="576" z:Type="CMissionLib.Conditions.UnitBuiltOnGhostCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="546" i:nil="true" />
+                  <Groups xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="577" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="578" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Id="579" z:Size="4">
+                        <d10p1:string z:Ref="87" i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>1</d10p1:_size>
+                      <d10p1:_version>3</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="580">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Groups>
+                </TriggerLogic>
+                <TriggerLogic z:Id="581" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="515" i:nil="true" />
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="582" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Make a kbot lab here.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">159.39</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">520.74</Y>
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>2</_size>
+              <_version>2</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="583">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="584">Trigger 3</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="585">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="586">
+            <items z:Id="587" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="588" z:Size="8">
+                <TriggerLogic z:Id="589" z:Type="CMissionLib.Conditions.UnitBuiltOnGhostCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="546" i:nil="true" />
+                  <Groups xmlns:d10p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" z:Id="590" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions">
+                    <d10p1:items z:Id="591" z:Type="System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" z:Assembly="0">
+                      <d10p1:_items z:Id="592" z:Size="4">
+                        <d10p1:string z:Id="593">radar1</d10p1:string>
+                        <d10p1:string z:Ref="94" i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                        <d10p1:string i:nil="true" />
+                      </d10p1:_items>
+                      <d10p1:_size>2</d10p1:_size>
+                      <d10p1:_version>2</d10p1:_version>
+                    </d10p1:items>
+                    <d10p1:_monitor xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="594">
+                      <d11p1:_busyCount>0</d11p1:_busyCount>
+                    </d10p1:_monitor>
+                  </Groups>
+                </TriggerLogic>
+                <TriggerLogic z:Id="595" z:Type="CMissionLib.Actions.GuiMessageAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Ref="137" i:nil="true" />
+                  <FontSize xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">14</FontSize>
+                  <Height xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">300</Height>
+                  <ImagePath i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions" />
+                  <Message z:Id="596" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Well done! To complete this mission, use your lab to build some units and then destroy the deserted enemy base on top of the central hill.  First you'll need to build mexes on a few nearby metal spots so as you have enough resources to use your lab. You only need one mex per spot. Build more solars/wind generators if you find you're short of energy.</Message>
+                  <Pause xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">true</Pause>
+                  <Width xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">498</Width>
+                </TriggerLogic>
+                <TriggerLogic z:Id="597" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="598">Marker</Name>
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">true</CenterCamera>
+                  <Text z:Id="599" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">Your commander can help your lab build faster. Select your commander and then right click on your lab to guard it.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">198.99</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">682.11</Y>
+                </TriggerLogic>
+                <TriggerLogic z:Id="600" z:Type="CMissionLib.Actions.MarkerPointAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="601">Marker</Name>
+                  <CenterCamera xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">false</CenterCamera>
+                  <Text z:Id="602" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">To remove these hint markers, hold ` and the right mouse button, then drag your mouse over them.</Text>
+                  <X xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">199.98000000000002</X>
+                  <Y xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Actions">637.56</Y>
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>4</_size>
+              <_version>6</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="603">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="604">Trigger 5</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger z:Id="605">
+          <Enabled>true</Enabled>
+          <Folder i:nil="true" />
+          <IsExpanded>true</IsExpanded>
+          <Logic z:Id="606">
+            <items z:Id="607" z:Type="System.Collections.Generic.List`1[[CMissionLib.TriggerLogic, CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" z:Assembly="0">
+              <_items z:Id="608" z:Size="4">
+                <TriggerLogic z:Id="609" z:Type="CMissionLib.Conditions.PlayerDiedCondition" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="610">Player Died</Name>
+                  <Player xmlns:d10p1="http://schemas.datacontract.org/2004/07/CMissionLib" z:Ref="39" i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/CMissionLib.Conditions" />
+                </TriggerLogic>
+                <TriggerLogic z:Id="611" z:Type="CMissionLib.VictoryAction" z:Assembly="CMissionLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+                  <Name z:Id="612">Victory</Name>
+                </TriggerLogic>
+                <TriggerLogic i:nil="true" />
+                <TriggerLogic i:nil="true" />
+              </_items>
+              <_size>2</_size>
+              <_version>2</_version>
+            </items>
+            <_monitor xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="613">
+              <d7p1:_busyCount>0</d7p1:_busyCount>
+            </_monitor>
+          </Logic>
+          <MaxOccurrences>1</MaxOccurrences>
+          <Name z:Id="614">Trigger 7</Name>
+          <Probability>1</Probability>
+        </Trigger>
+        <Trigger i:nil="true" />
+      </_items>
+      <_size>7</_size>
+      <_version>21</_version>
+    </items>
+    <_monitor xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel" z:Id="615">
+      <d3p1:_busyCount>0</d3p1:_busyCount>
+    </_monitor>
+  </Triggers>
+</Mission>

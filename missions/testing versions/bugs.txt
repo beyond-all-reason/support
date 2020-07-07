@@ -1,0 +1,8 @@
+multiple patrol orders don't get through - only first is acted on
+counters continue when game is paused
+
+
+
+
+would be nice to have +e amd +m as conditions
+what is difference between unit created and unit finished? also, they seem to always be satisfied
