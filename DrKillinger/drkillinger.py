@@ -3,6 +3,7 @@ import os
 import copy
 import math
 from s3o import S3O,S3OPiece
+import trimesh
 
 from Tkinter import *
 # from ttk import *
@@ -10,6 +11,7 @@ import tkFileDialog
 import tkFont
 import collections
 import random
+import numpy as np
 PieceInfo = collections.namedtuple('Pieceinfo', 'name pname vol verts children emptychildren d')
 # severities: wreck, heap, destroy
 
@@ -308,6 +310,7 @@ class App:
 	def loadbos(self, boslines):
 		bospiecelist=[]
 		killtable=[{},{},{},{}]
+		self.deathanims = {} # a table of piecename: { {(move|turn, axis)}:pos}
 		l=0
 		killedindex=0
 		for line in boslines:
@@ -315,7 +318,6 @@ class App:
 			#strip comments:
 			line=uncomment(line)
 			if line[0:5]=='piece' and bospiecelist==[]:
-	
 				if ';' not in line:
 					line+=uncomment(boslines[l+1])+uncomment(boslines[l+2])+uncomment(boslines[l+3]) #wow this is ugly, i cant write parsers for shit.
 					line=line.partition(';')[0]+';'
@@ -329,7 +331,7 @@ class App:
 					if 'corpsetype' in line and 'return' not in line: #lets hope to got that corpsetype always precedes explodes
 						print line
 						killedindex+=1	
-					if 'explode' in line:
+					elif 'explode' in line:
 						p=delimit(line,'explode','type')
 						flags=[x.strip() for x in delimit(line,'type',';').split('|')]
 						print p,killedindex, flags
@@ -341,13 +343,23 @@ class App:
 								del flags[flags.index(flag)]
 								
 						killtable[killedindex][p.lower()]=flags
-						
+					elif 'move' in line or 'turn' in line:
+						line = line.split()
+						print line
+						try:
+							moveturn,piecename,_,axis, value = line[0:5]
+							if piecename not in self.deathanims:
+								self.deathanims[piecename] = {}
+
+							self.deathanims[piecename][(moveturn,axis)] = float(value.strip('><[]_'))
+						except ValueError:
+							print ("Unable to unpack line for deathanim:",line)
 				break
 
 			l+=1	
 		if len(bospiecelist)!=len(self.piecelist):
 			print 'WARNING: the bos piece list does not match the s3o piece list!', bospiecelist, self.piecelist
-			
+		print self.deathanims
 		return killtable
 
 	def saveunit(self): #wtf should this even do?
@@ -412,6 +424,8 @@ class App:
 			if piece.name==leafest:
 				self.clearpiece(0,piece.name)
 				self.setflags(0,piece.name,['FALL','SMOKE','FIRE'])
+				if piece.name in self.keeplist:
+					self.keeplist.remove(piece.name)
 			else:
 				self.clearpiece(0,piece.name)
 				self.setflags(0,piece.name,['BITMAPONLY'])
@@ -553,7 +567,11 @@ class App:
 		print 'validation OK!'
 		return
 	def wreckunits3o(self):
-		self.destroy(0,0.05+random.random()/10,0.5,random.random()*100)
+
+
+
+		#self.destroy(0,0.05+random.random()/10,0.5,random.random()*100)
+		self.destroy(0,0,0,0)
 		self.wreckeds3o.texture_paths=(self.tex1.get(),self.tex2.get())
 		optimized_data = self.wreckeds3o.serialize()
 		output_file=open(self.modpath+'objects3d/Units/'+self.unitname+'_dead.s3o','wb')
@@ -571,10 +589,30 @@ class App:
 		self.wreckeds3o.root_piece.indices=[]
 		self.wreckeds3o.root_piece.children=[]
 		self.wreckeds3o.root_piece.primitive_type='triangles'
-		self.grab(copy.deepcopy(self.s3o.root_piece),self.wreckeds3o.root_piece,twist, shear, deform,(0,0,0),shearang)
+		self.wreckeds3o.root_piece.parent_offset = (0,0,0)
+		nullmat = trimesh.transformations.euler_matrix(0, 0, 0, 'rzxy')
+		self.grab(copy.deepcopy(self.s3o.root_piece),self.wreckeds3o.root_piece,twist, shear, deform,(0,0,0),shearang, rtmatrix = nullmat)
 
 		# self.rootPiece=0
-	def grab(self, piece, base, twist, shear, deform,offsets,shearang):
+	def grab(self, piece, base, twist, shear, deform,offsets,shearang, rtmatrix = None):
+		offsettranslation = trimesh.transformations.translation_matrix(piece.parent_offset)
+		offsettranslation = trimesh.transformations.concatenate_matrices(rtmatrix,offsettranslation)
+
+		if piece.name in self.deathanims:
+			deathanimtransvector = [0,0,0]
+			deathanimrotvector = [0,0,0]
+			for action,value in self.deathanims[piece.name].items():
+				axidx = 'xyz'.index(action[1][0])
+				if action[0] == 'move':
+					deathanimtransvector[axidx] = value
+				else:
+
+					deathanimrotvector[axidx] = 3.1415* value / 180.0
+			print "Deathrot:", deathanimrotvector
+			print "deathtrans:", deathanimtransvector
+			offsettranslation = trimesh.transformations.concatenate_matrices(offsettranslation, trimesh.transformations.translation_matrix(deathanimtransvector))
+			offsettranslation = trimesh.transformations.concatenate_matrices(offsettranslation , trimesh.transformations.euler_matrix(deathanimrotvector[2],deathanimrotvector[0],deathanimrotvector[1],'rzxy'))
+		print offsettranslation
 		print 'grabbing', piece.name,'#verts',len(piece.vertices),'#index',len(piece.indices)
 		if piece.primitive_type!='triangles' and len(piece.vertices)!=0:
 			print 'Piece cant be grabbed, as its not empty and has non triangles!',piece.primitive_type,len(piece.vertices)
@@ -590,9 +628,11 @@ class App:
 				offsets=(offsets[0]+piece.parent_offset[0],offsets[1]+piece.parent_offset[1],offsets[2]+piece.parent_offset[2])
 				for vt in piece.vertices:
 					v=[[vt[0][0],vt[0][1],vt[0][2]],[vt[1][0],vt[1][1],vt[1][2]],[vt[2][0],vt[2][1]]]
-					v[0][0]+=offsets[0]
-					v[0][1]+=offsets[1]
-					v[0][2]+=offsets[2]
+					newv = list(np.dot(offsettranslation,(v[0]+[1])))
+					v[0] = newv[0:3]
+					#v[0][0]+=offsets[0]
+					#v[0][1]+=offsets[1]
+					#v[0][2]+=offsets[2]
 					v[0][0]+=deform*(math.sin(v[0][0])+math.cos(v[0][2])+math.sin(v[0][1]+2.3))
 					v[0][1]+=min( 1 ,max(0,v[0][1]/10))*deform*(math.sin(v[0][0]+4)+math.cos(v[0][2]+7)+math.sin(v[0][1]+1))
 					v[0][2]+=deform*(math.sin(v[0][0]+2)+math.cos(v[0][2]+3)+math.sin(v[0][1]-11))
@@ -603,7 +643,7 @@ class App:
 					#print vt, v
 		for c in piece.children:
 			print len(base.vertices)
-			self.grab(c,base,twist, shear, deform,offsets,shearang)
+			self.grab(c,base,twist, shear, deform,offsets,shearang,rtmatrix = offsettranslation)
 	def recursepiecetree(self, piece, depth,offset,pl,parentname): # we need the name offset by depth, the volume, the #triangles and the pos
 		global PieceInfo
 		namejust=20
