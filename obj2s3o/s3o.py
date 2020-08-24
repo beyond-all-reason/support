@@ -560,6 +560,7 @@ class S3O(object):
 		return data
 
 
+
 class S3OPiece(object):
 	# def __init__(self, data, offset, parent, i):
 	# for l in data:
@@ -603,6 +604,39 @@ class S3OPiece(object):
 				cur_offset = children_offset + _S3OChildOffset_struct.size * i
 				child_offset, = _S3OChildOffset_struct.unpack_from(data, cur_offset)
 				self.children.append(S3OPiece(data, child_offset, self))
+
+	def recurse_bin_vertex_ao(self,allbins = {}):
+		aobins = {}
+		for i in range(0,256/4):
+			aobins[i] = 0
+		for i, vertex in enumerate(self.vertices):
+			vertex_ao_value = (math.floor(vertex[2][0] * 16384.0) / 16384.0 )* 255.0
+			aobins[int(vertex_ao_value)/4] +=1
+			print "AO value for piece",self.name,i,vertex_ao_value
+		for i in range(0, 256/4):
+			print '%04i %04i'%(i,aobins[i])
+		allbins[self.name] = aobins
+		for child in self.children:
+			child.recurse_bin_vertex_ao(allbins = allbins)
+
+		return allbins
+		#if aobins[0] ==0 and aobins[256/4-1] == 0 :
+		#	return True
+		#else:
+		#	return False
+
+	def recurse_clear_vertex_ao(self,zerolevel=200):
+
+		for i, vertex in enumerate(self.vertices):
+			vertex_ao_value = zerolevel
+			newuv = (
+			math.floor(vertex[2][0] * 16384.0) / 16384.0 + (1 / 16384.0 )* ((vertex_ao_value + 5) / 266.0), vertex[2][1])
+			# print newuv, vertex
+			vertex = (vertex[0], vertex[1], newuv)
+			self.vertices[i] = vertex
+		print "[INFO]","Set all vertex ao terms to 200 in piece", self.name
+		for child in self.children:
+			child.recurse_clear_vertex_ao(zerolevel=zerolevel)
 
 	def serialize(self, offset):
 		name_offset = _S3OPiece_struct.size + offset

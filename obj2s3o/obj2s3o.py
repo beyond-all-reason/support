@@ -150,6 +150,7 @@ class App:
 		
 		self.prompts3ofilename=IntVar()
 		Button(opts3oframe , text='Optimize s3o', command=self.optimizes3o).pack(side=LEFT)
+		Button(opts3oframe , text='Clear AO s3o', command=self.optimizeaos3o).pack(side=LEFT)
 		Label(opts3oframe,text='Removes redundant vertices and performs vertex cache optimization').pack(side=LEFT)
 		
 		Button(swaptexframe , text='Override texture', command=self.swaptex).pack(side=LEFT)
@@ -243,6 +244,13 @@ class App:
 			if 's3o' in file.lower():
 				self.initialdir=file.rpartition('/')[0]
 				optimizeS3O(file)
+	def optimizeaos3o(self):
+		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
+		self.s3ofile = string2list(self.s3ofile)
+		for file in self.s3ofile:
+			if 's3o' in file.lower():
+				self.initialdir=file.rpartition('/')[0]
+				clearAOS3O(file)
 	def swaptex(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile) 
@@ -305,7 +313,29 @@ def optimizeS3O(filename):
 	output_file=open(filename,'wb')
 	output_file.write(optimized_data)
 	output_file.close()
+	allbins = model.root_piece.recurse_bin_vertex_ao()
+	print 'bin\t' + '\t'.join(sorted(allbins.keys()))
+
+	for i in range(0, 256 / 4):
+		print '%i\t' % i + '\t'.join(['%04d' % allbins[k][i] for k in sorted(allbins.keys())])
+
 	print '[INFO]',"Succesfully optimized", filename
+
+def clearAOS3O(filename):
+		datafile = open(filename, 'rb')
+		data = datafile.read()
+		model = S3O(data)
+		pre_vertex_count = countvertices(model.root_piece)
+		recursively_optimize_pieces(model.root_piece)
+		model.root_piece.recurse_clear_vertex_ao()
+		optimized_data = model.serialize()
+		datafile.close()
+		print '[INFO]', 'Number of vertices before optimization:', pre_vertex_count, ' after optimization:', countvertices(
+			model.root_piece)
+		output_file = open(filename, 'wb')
+		output_file.write(optimized_data)
+		output_file.close()
+		print '[INFO]', "Succesfully optimized", filename
 def countvertices(piece):
 	numverts=len(piece.vertices)
 	for child in piece.children:
