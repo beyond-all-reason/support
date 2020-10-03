@@ -17,6 +17,7 @@ parser=OptionParser(usage="usage: python sleepy_tranlator.py -i capture.csv", ve
 parser.add_option('-i', '--input',action='store',dest='input', default='capture.sleepy',help='input csv file from Very Sleepy')
 parser.add_option('-s', '--sourcepath',action='store',dest='sourcepath',help='Source path for spring source e.g. D:/springsource/',default = 'N:/engine_source/spring/')
 parser.add_option('-d', '--dbgfile',action='store',dest='dbgfile',help='debug file to use',default ='spring.dbg')
+parser.add_option('-a', '--addr2linekey', action = 'store', dest = 'addr2linekey', help ='A SANE BASE PATH IN THE addr2line_results.txt file', default = 'build/default/../../')
 
 options, args=parser.parse_args()
 sleepytype='csv'
@@ -125,9 +126,9 @@ for sleepyline in sleepyfile:
 			newsourceline=result[shortaddr].partition(':')[2]
 			if '?' in newsourceline:
 				newsourceline = '0'
-			if options.sourcepath and 'build/default/../../' in newsourcefile:
+			if options.sourcepath and options.addr2linekey in newsourcefile:
 				
-				rawsourcefile = newsourcefile.partition('build/default/../../')[2]
+				rawsourcefile = newsourcefile.partition(options.addr2linekey)[2]
 				if '?' in sleepyline:
 					print('rawsourcefile',rawsourcefile)
 				path=options.sourcepath+rawsourcefile
@@ -141,8 +142,8 @@ for sleepyline in sleepyfile:
 				out_line = ' '.join([sym,'"'+module+'"','"'+shortname+'"','"'+path+'"',str(newsourceline)])+'\n'
 				outf.write(out_line)
 			else:
-				if 'build/default/../../' in newsourcefile:
-					address = newsourcefile.partition('build/default/../../')[2]
+				if options.addr2linekey in newsourcefile:
+					address = newsourcefile.partition(options.addr2linekey)[2]
 				outf.write(' '.join([sym,'"'+module+'"','"'+address+'"','"'+newsourcefile+'"', newsourceline])+'\n')
 		else:
 			outf.write(sleepyline)
