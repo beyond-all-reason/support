@@ -78,6 +78,9 @@ if addr2line.returncode != 0:
 print ('\t\t[OK]')
 # print stdout
 translated = stdout.split('\n')
+addr2linefile = open('addr2line_results.txt','w')
+addr2linefile.write(stdout)
+addr2linefile.close()
 result = {}
 if len(to_translate) <= len(translated):
 	for i in range(len(to_translate)):
