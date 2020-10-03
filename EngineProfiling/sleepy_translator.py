@@ -66,7 +66,7 @@ for sleepyline in sleepyfile:
 # print 'addresses:',to_translate
 cmd = ['addr2line.exe', '-e', options.dbgfile]
 print('Command line: ' + ' '.join(cmd))
-addr2line = Popen(cmd, stdin = PIPE, stdout = PIPE, stderr = PIPE)
+addr2line = Popen(cmd, stdin = PIPE, stdout = PIPE, stderr = PIPE,encoding='utf8')
 if addr2line.poll() == None:
 	stdout, stderr = addr2line.communicate('\n'.join(to_translate))
 else:
@@ -114,14 +114,19 @@ for sleepyline in sleepyfile:
 	try:
 		(sym, module, address, sourcefile, sourceline)=shlex.split(sleepyline.strip())
 		shortaddr=address.strip('[]\"') 
+		if '?' in sleepyline:
+			print ("?",sleepyline)
 		if shortaddr in result:
 			goodline+=1
 			newsourcefile=result[shortaddr].partition(':')[0]
 			newsourceline=result[shortaddr].partition(':')[2]
+			if '?' in newsourceline:
+				newsourceline = '0'
 			if options.sourcepath and 'build/default/../../' in newsourcefile:
 				
 				rawsourcefile = newsourcefile.partition('build/default/../../')[2]
-				print('rawsourcefile',rawsourcefile)
+				if '?' in sleepyline:
+					print('rawsourcefile',rawsourcefile)
 				path=options.sourcepath+rawsourcefile
 				shortname='<'+rawsourcefile.rpartition('/')[2]+'> ' # so we only have the filename like Unit.cpp
 				codeline=getcodeline(path, int(newsourceline))
@@ -130,11 +135,12 @@ for sleepyline in sleepyfile:
 						shortname=shortname+codeline
 				shortname.replace('"','')
 				#shortname= 'dunno'
-				outf.write(' '.join([sym,'"'+module+'"','"'+shortname+'"','"'+path+'"',str(newsourceline)]))
+				out_line = ' '.join([sym,'"'+module+'"','"'+shortname+'"','"'+path+'"',str(newsourceline)])+'\n'
+				outf.write(out_line)
 			else:
 				if 'build/default/../../' in newsourcefile:
 					address = newsourcefile.partition('build/default/../../')[2]
-				outf.write(' '.join([sym,'"'+module+'"','"'+address+'"','"'+newsourcefile+'"', newsourceline]))
+				outf.write(' '.join([sym,'"'+module+'"','"'+address+'"','"'+newsourcefile+'"', newsourceline])+'\n')
 		else:
 			outf.write(sleepyline)
 	except:
