@@ -122,8 +122,8 @@ for sleepyline in sleepyfile:
 			print ("?",sleepyline)
 		if shortaddr in result:
 			goodline+=1
-			newsourcefile=result[shortaddr].partition(':')[0]
-			newsourceline=result[shortaddr].partition(':')[2]
+			newsourcefile=result[shortaddr].rpartition(':')[0]
+			newsourceline=result[shortaddr].rpartition(':')[2]
 			if '?' in newsourceline:
 				newsourceline = '0'
 			if options.sourcepath and options.addr2linekey in newsourcefile:
