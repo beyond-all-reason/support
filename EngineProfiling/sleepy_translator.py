@@ -13,8 +13,8 @@ import sys
 import shlex
 from subprocess import Popen, PIPE
 
-parser=OptionParser(usage="usage: python sleepy_tranlator.py -i capture.csv", version= "0.1")
-parser.add_option('-i', '--input',action='store',dest='input', default='capture.sleepy',help='input csv file from Very Sleepy')
+parser=OptionParser(usage="usage: python sleepy_tranlator.py -i capture.sleepy", version= "0.1")
+parser.add_option('-i', '--input',action='store',dest='input', default='capture.sleepy',help='input .sleepy file from Very Sleepy')
 parser.add_option('-s', '--sourcepath',action='store',dest='sourcepath',help='Source path for spring source e.g. D:/springsource/',default = 'N:/engine_source/spring/')
 parser.add_option('-d', '--dbgfile',action='store',dest='dbgfile',help='debug file to use',default ='spring.dbg')
 parser.add_option('-a', '--addr2linekey', action = 'store', dest = 'addr2linekey', help ='A SANE BASE PATH IN THE addr2line_results.txt file', default = 'build/default/../../')
@@ -91,21 +91,70 @@ else:
 
 print('Query successful, stacktrace results', len(result))
 
+def is_this_a_cpp_function_def(line):
+	line = line.partition('//')[0].strip() #uncomment
+	words = line.split()
+	if 'inline' in words: #pretty much the only real exception
+		return 1
+	if ';' in line: #functions are not terminated
+		return -2
+	if '=' in line: # cant have assignment ops in function
+		return -3
+	if len(line) < 16: # no really short func defs
+		return -4
+	if ('(' not in line) or (')' not in line): #func defs always have parenthesis for parameters
+		return -5
+	if 'if' in words: #no if's in funcs
+		return -6
+	if 'for' in words:
+		return -7
+	if 'while' in words:
+		return -8
+	if 'switch' in words:
+		return -9
+	if 'case' in words:
+		return -10
+	#print ('Func-like line:',line)
+	if '::' in line: #
+		return 11
+	if line.startswith('void'):
+		return 12
+	return 1000
+
 
 def getcodeline(path, i): #fetches line i of the code, removes double quotes, replace with singles, max length of 80 chars
 	try:
 		codef=open(path)
 		codelines=codef.readlines()
 		line=codelines[i-1] #because lines are indexed from 1!
+		
+		#try to find a function definition above this:
+		funcdefline = i-1
+		while(is_this_a_cpp_function_def(codelines[funcdefline]) < 0 or funcdefline ==0):
+			funcdefline = funcdefline -1
+		
+		funcdefdebug = is_this_a_cpp_function_def(codelines[funcdefline])
 		line=line.strip().replace('\"','')
+		
 		line=line.replace('	','')
 		line=line.replace('\\','')
+		print ('Found func (%i) def for line %i at %i %s -> %s'%(funcdefdebug,i-1,funcdefline,line,codelines[funcdefline]))
+		
+		#shorten funcdef sanely:
+		shortfuncdef = codelines[funcdefline]
+		shortfuncdef = shortfuncdef.partition('//')[0]
+		shortfuncdef = shortfuncdef.rpartition('(')[0]
+		shortfuncdef = shortfuncdef.rpartition(' ')[2]
+		print ('Shortfuncdef = ',shortfuncdef)
+		
 		if len(line)>75:
 			line=line[0:74]+'...'
 		#print 'got code line:',line
 		if len(line)<1:
 			print('got suspiciosly short line',path,i,line)
-		return line
+			
+		codef.close()
+		return shortfuncdef
 	except:
 		print('warning, cant fine code line',path,line)
 		pass
