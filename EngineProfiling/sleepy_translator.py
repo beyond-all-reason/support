@@ -20,51 +20,34 @@ parser.add_option('-d', '--dbgfile',action='store',dest='dbgfile',help='debug fi
 parser.add_option('-a', '--addr2linekey', action = 'store', dest = 'addr2linekey', help ='A SANE BASE PATH IN THE addr2line_results.txt file', default = 'build/default/../../')
 
 options, args=parser.parse_args()
-sleepytype='csv'
-print(options)
 
-dbgmax=100000000
-cnt=0
+print("Selected options:",options)
 
-if '.sleepy' in options.input:
-	fh=open(options.input, 'rb') 
-	z=zipfile.ZipFile(fh)
-	for name in z.namelist():
-		print(name)
-		z.extract(name, os.getcwd())
+#Open the .sleepy file and unzip its contents
+fh=open(options.input, 'rb')
+z=zipfile.ZipFile(fh)
+for name in z.namelist():
+	print(name)
+	z.extract(name, os.getcwd())
 
-	symbols=open('Symbols.txt')
-	sleepyfile=symbols.readlines()
-	symbols.close()
-else:
-	print('failed to open',options.input)
+symbols=open('Symbols.txt')
+sleepyfile=symbols.readlines()
+symbols.close()
 
 
-
-
-address_count=0
+#collect the addresses we wish to translate with addr2line:
 to_translate=[]
 for sleepyline in sleepyfile:
-	#print sleepyline
 	try:
 		(sym, module, address, sourcefile, sourceline)=shlex.split(sleepyline.strip())#sym1473 "nvoglv32" "[687BAD05]" "" 0
-		#print name, module,inpercent
-		# print "module, address",module, address
-		if module=='spring' and '[' in address:
-			if cnt<dbgmax:
-				cnt+=1
-				oldaddr=address
-				# print address
-				# print address.strip('\"[]')
-				to_translate.append(address.strip('\"[]'))
-				address_count+=1		
-
+		if 'spring' in module:
+			to_translate.append(sym)
 	except:
 		print('Failed to parse line',sleepyline,'in',options.input,sleepyline.strip().split(' '))
 		traceback.print_exc()
 		pass
-		
-# print 'addresses:',to_translate
+
+#Perform the address translation:
 cmd = ['addr2line.exe', '-e', options.dbgfile]
 print('Command line: ' + ' '.join(cmd))
 addr2line = Popen(cmd, stdin = PIPE, stdout = PIPE, stderr = PIPE,encoding='utf8')
@@ -80,8 +63,11 @@ print ('\t\t[OK]')
 # print stdout
 translated = stdout.split('\n')
 addr2linefile = open('addr2line_results.txt','w')
-addr2linefile.write(stdout)
+for i,sleepyline in enumerate(to_translate):
+	addr2linefile.write(sleepyline + ' -->>> ' + translated[i] + '\n')
 addr2linefile.close()
+
+#parse the results of addr2line into a dict, and make sure we have the correct amount of entries in both:
 result = {}
 if len(to_translate) <= len(translated):
 	for i in range(len(to_translate)):
@@ -91,8 +77,10 @@ else:
 
 print('Query successful, stacktrace results', len(result))
 
+#this janky function tries to make a guess whether a line is a function definition or not
 def is_this_a_cpp_function_def(line):
 	line = line.partition('//')[0].strip() #uncomment
+	line = line.partition('/*')[0].strip() + line.partition('*/')[2].strip() #more uncomment
 	words = line.split()
 	if 'inline' in words: #pretty much the only real exception
 		return 1
@@ -102,7 +90,7 @@ def is_this_a_cpp_function_def(line):
 		return -3
 	if len(line) < 16: # no really short func defs
 		return -4
-	if ('(' not in line) or (')' not in line): #func defs always have parenthesis for parameters
+	if ('(' not in line): #func defs always have parenthesis for parameters
 		return -5
 	if 'if' in words: #no if's in funcs
 		return -6
@@ -122,59 +110,74 @@ def is_this_a_cpp_function_def(line):
 	return 1000
 
 
-def getcodeline(path, i): #fetches line i of the code, removes double quotes, replace with singles, max length of 80 chars
+def getcodeline(path, i):
+	#fetches line i of the code, removes double quotes, replace with singles, max length of 80 chars
+	#also tries to guess the function name
 	try:
-		codef=open(path)
-		codelines=codef.readlines()
+		codefile=open(path)
+		codelines=codefile.readlines()
 		line=codelines[i-1] #because lines are indexed from 1!
-		
+		if 'lvm.cpp' in path:
+			print ("look we have lvm.cpp here!")
 		#try to find a function definition above this:
 		funcdefline = i-1
-		while(is_this_a_cpp_function_def(codelines[funcdefline]) < 0 or funcdefline ==0):
+		while((is_this_a_cpp_function_def(codelines[funcdefline]) < 0 ) and (funcdefline >1)):
 			funcdefline = funcdefline -1
 		
 		funcdefdebug = is_this_a_cpp_function_def(codelines[funcdefline])
-		line=line.strip().replace('\"','')
-		
-		line=line.replace('	','')
-		line=line.replace('\\','')
-		print ('Found func (%i) def for line %i at %i %s -> %s'%(funcdefdebug,i-1,funcdefline,line,codelines[funcdefline]))
-		
-		#shorten funcdef sanely:
-		shortfuncdef = codelines[funcdefline]
-		shortfuncdef = shortfuncdef.partition('//')[0]
-		shortfuncdef = shortfuncdef.rpartition('(')[0]
-		shortfuncdef = shortfuncdef.rpartition(' ')[2]
-		print ('Shortfuncdef = ',shortfuncdef)
-		
-		if len(line)>75:
-			line=line[0:74]+'...'
-		#print 'got code line:',line
-		if len(line)<1:
-			print('got suspiciosly short line',path,i,line)
-			
-		codef.close()
+		if funcdefline <3:
+			line = line.strip().replace('\"', '')
+			line = line.replace('	', '')
+			line = line.replace('\\', '')
+			if len(line) > 75:
+				line = line[0:74] + '...'
+			# print 'got code line:',line
+			if len(line) < 1:
+				print('got suspiciosly short line', path, i, line)
+			shortfuncdef = line
+		else:
+			print ('Found func (%i) def for line %i at %i %s -> %s'%(funcdefdebug,i-1,funcdefline,line,codelines[funcdefline]))
+			#shorten funcdef sanely:
+			shortfuncdef = codelines[funcdefline]
+			shortfuncdef = shortfuncdef.partition('//')[0].strip()
+			shortfuncdef = shortfuncdef.rpartition('(')[0].strip()
+			shortfuncdef = shortfuncdef.rpartition(' ')[2].strip()
+			print ('Shortfuncdef = ',shortfuncdef)
+
+		codefile.close()
 		return shortfuncdef
-	except:
+	except Exception as e:
 		print('warning, cant fine code line',path,line)
-		pass
+
 		return ''
-	
+
+#rewrite the symbols.txt output
 outf=open('Symbols.txt','w')
 goodline=0
 for sleepyline in sleepyfile:
-	#print sleepyline
 	try:
 		(sym, module, address, sourcefile, sourceline)=shlex.split(sleepyline.strip())
-		shortaddr=address.strip('[]\"') 
+		shortaddr=address.strip('[]\"')
+		if '439cbf' in sym:
+			print ("WAIT A MINUTE")
+		try:
+			symint = int(sym,0)
+			hexaddr = int('0x'+shortaddr,0)
+			wtf =  int(0x932011)
+			if hexaddr > wtf: #danger zone!
+				wtf = wtf + 0
+		except:
+			pass
 		if '?' in sleepyline:
 			print ("?",sleepyline)
-		if shortaddr in result:
+		if sym in result:
 			goodline+=1
-			newsourcefile=result[shortaddr].rpartition(':')[0]
-			newsourceline=result[shortaddr].rpartition(':')[2]
+			newsourcefile=result[sym].rpartition(':')[0]
+			newsourceline=result[sym].rpartition(':')[2]
+
 			if '?' in newsourceline:
 				newsourceline = '0'
+
 			if options.sourcepath and options.addr2linekey in newsourcefile:
 				
 				rawsourcefile = newsourcefile.partition(options.addr2linekey)[2]
@@ -188,12 +191,21 @@ for sleepyline in sleepyfile:
 						shortname=shortname+codeline
 				shortname.replace('"','')
 				#shortname= 'dunno'
+
+				if 'skirmishAiCallback_DataDirs_getWriteableDir' in shortname:
+					shortname = 'LIB:['+ newsourcefile + ':' + newsourceline+']'
 				out_line = ' '.join([sym,'"'+module+'"','"'+shortname+'"','"'+path+'"',str(newsourceline)])+'\n'
+
 				outf.write(out_line)
 			else:
 				if options.addr2linekey in newsourcefile:
 					address = newsourcefile.partition(options.addr2linekey)[2]
-				outf.write(' '.join([sym,'"'+module+'"','"'+address+'"','"'+newsourcefile+'"', newsourceline])+'\n')
+				else:
+					address = 'nosrc_LIB:['+ newsourcefile.rpartition('/')[2] + ':' + newsourceline+']'
+				if 'skirmishAiCallback_DataDirs_getWriteableDir' in address:
+					address = 'skirmishAiCallback_DataDirs_getWriteableDir_LIB:['+ newsourcefile + ':' + newsourceline+']'
+				out_line = ' '.join([sym,'"'+module+'"','"'+address+'"','"'+newsourcefile+'"', newsourceline])+'\n'
+				outf.write(out_line)
 		else:
 			outf.write(sleepyline)
 	except:
@@ -215,8 +227,6 @@ cmd='zip -1 '+outfname+' Stats.txt Symbols.txt IPCounts.txt Callstacks.txt "Vers
 print(cmd)
 os.system(cmd)
 print('Done zipping')
-
-
 
 #Sleepy line format:
 #0. Name (or address, if unable to resolve)
