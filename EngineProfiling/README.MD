@@ -26,3 +26,13 @@ Launch the translator with:
 python sleepy_translator.py -i myprofile.sleepy -s c:\temp\springsources\spring-master\ dont forget the trailing slash at the -s path to source option.
 
 Open the myprofile_translated.sleepy file, and bask in the translated glory!
+
+**Creating a spring.dbg**
+
+As the debug symbols are no longer on buildbot, you gotta make them yourself:
+
+set tostripfile=G:\_programming\zero-k\spring-m\build-mingw-m64\spring.exe
+
+set debugfile=E:\Games\Spring\_support\spring.dbg
+
+objcopy --only-keep-debug "%tostripfile%" "%debugfile%"
