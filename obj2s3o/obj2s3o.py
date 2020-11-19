@@ -31,96 +31,6 @@ howtoemit=('''const unsigned int count = piece->GetVertexCount();
 	return true;
 ''')
 
-##if there are zero vertices, the emit direction is 0,0,1, the emit position is the origin of the piece
-##if there is 1 vertex, the emit dir is the vector from the origin to the the position of the first vertex the emit position is the origin of the piece
-## if there is more than one, then the emit vector is the vector pointing from v[0] to v[1], and the emit position is v[0]
-def fix_zero_normals_piece(piece):
-	badnormals=0
-	fixednormals=0
-	if len(piece.indices)>0:
-		
-		for v_i in range(len(piece.vertices)):
-			vertex=piece.vertices[v_i] 
-			#print (vertex[1])
-			if vectorlength(vertex[1])<0.01: #nearly 0 normal
-				badnormals+=1
-				if v_i not in piece.indices:
-					#this is some sort of degenerate vertex, just replace it's normal with [0,1,0]
-					piece.vertices[v_i]=(vertex[0],(0.0,1.0,0.0),vertex[2])
-					fixednormals+=1
-				else:
-					for f_i in range(0,len(piece.indices) ,3):
-						if v_i in piece.indices[f_i:min(len(piece.indices),f_i+3)]:
-							newnormal = vectorcross(vectorminus(piece.vertices[piece.indices[f_i+1]][0],piece.vertices[piece.indices[f_i]][0]),vectorminus(piece.vertices[piece.indices[f_i+2]][0],piece.vertices[piece.indices[f_i]][0]))
-							if vectorlength(newnormal)<0.001:
-								piece.vertices[v_i]=(vertex[0],(0.0,1.0,0.0),vertex[2])
-							else:
-								piece.vertices[v_i]=(vertex[0],normalize(newnormal),vertex[2])
-							fixednormals+=1
-							break
-	if badnormals>0:
-		print '[WARN]','Bad normals:',badnormals,'Fixed:',fixednormals
-		if badnormals!=fixednormals:
-			print '[WARN]','NOT ALL ZERO NORMALS fixed!!!!!' #this isnt possible with above code anyway :/
-	# for child in piece.children:
-		# fix_zero_normals_piece(child)
-
-def recursively_optimize_pieces(piece):
-    if type(piece.indices) == type ([]) and len(piece.indices)>4:
-		optimize_piece(piece)
-		fix_zero_normals_piece(piece)
-    for child in piece.children:
-        recursively_optimize_pieces(child)
-
-def chunks(l, n):	
-    """ Yield successive n-sized chunks from l.
-    """
-    for i in range(0, len(l), n):
-        yield tuple(l[i:i + n])
-
-
-def optimize_piece(piece):
-    remap = {}
-    new_indices = []
-    print '[INFO]','Optimizing:',piece.name
-    for index in piece.indices:
-        vertex = piece.vertices[index]
-        if vertex not in remap:
-            remap[vertex] = len(remap)
-        new_indices.append(remap[vertex])
-
-    new_vertices = [(index, vertex) for vertex, index in remap.items()]
-    new_vertices.sort()
-    new_vertices = [vertex for index, vertex in new_vertices]
-
-    if piece.primitive_type == "triangles" and len(new_indices) > 0:
-        tris = list(chunks(new_indices, 3))
-        acmr = vertex_cache.average_transform_to_vertex_ratio(tris)
-
-        tmp = vertex_cache.get_cache_optimized_triangles(tris)
-        acmr_new = vertex_cache.average_transform_to_vertex_ratio(tmp)
-        if acmr_new < acmr:
-            new_indices = []
-            for tri in tmp:
-                new_indices.extend(tri)
-
-    vertex_map = []
-    remapped_indices = []
-    for index in new_indices:
-        try:
-            new_index = vertex_map.index(index)
-        except ValueError:
-            new_index = len(vertex_map)
-            vertex_map.append(index)
-
-        remapped_indices.append(new_index)
-
-    new_vertices = [new_vertices[index] for index in vertex_map]
-    new_indices = remapped_indices
-
-    piece.indices = new_indices
-    piece.vertices = new_vertices
-
 
 def sizeof_fmt(num):
     for x in ['bytes', 'KB', 'MB', 'GB']:
@@ -132,7 +42,6 @@ def sizeof_fmt(num):
 
 
 class App:
-
 	def __init__(self, master):
 		self.initialdir=os.getcwd()
 		master.title('OBJ <--> S3O - By Beherith - Thanks to Muon\'s wonderful s3o library!')
@@ -140,17 +49,91 @@ class App:
 		objtos3oframe = Frame(master, bd=1, relief = SUNKEN)
 		s3otoobjframe = Frame(master, bd=3, relief = SUNKEN)
 		opts3oframe   = Frame(master, bd=3, relief = SUNKEN)
+
+		clearaoframe   = Frame(master, bd=3, relief = SUNKEN)
+		printaoframe   = Frame(master, bd=3, relief = SUNKEN)
+		generateaoframe   = Frame(master, bd=3, relief = SUNKEN)
+		xnormalframe = Frame(generateaoframe, bd=3, relief = SUNKEN)
+		aooptsframe = Frame(generateaoframe, bd=3, relief = SUNKEN)
+		aooptsframe2 = Frame(generateaoframe, bd=3, relief = SUNKEN)
+
 		swaptexframe   = Frame(master, bd=3, relief = SUNKEN)
+
 		frame.pack()
 		objtos3oframe.pack(side=TOP,fill=X)
 		s3otoobjframe.pack(side=TOP,fill=X)
 		opts3oframe.pack(side=TOP,fill=X)
+		clearaoframe.pack(side=TOP,fill=X)
+		printaoframe.pack(side=TOP,fill=X)
+		generateaoframe.pack(side=TOP,fill=X)
+		xnormalframe.pack(side=TOP,fill=X)
+		aooptsframe.pack(side=TOP,fill=X)
+		aooptsframe2.pack(side=TOP,fill=X)
+
 		swaptexframe.pack(side=TOP,fill=X)
 		Button(frame, text="QUIT", fg="red", command=frame.quit).pack(side=TOP)
 		
 		self.prompts3ofilename=IntVar()
 		Button(opts3oframe , text='Optimize s3o', command=self.optimizes3o).pack(side=LEFT)
-		Button(opts3oframe , text='Clear AO s3o', command=self.optimizeaos3o).pack(side=LEFT)
+
+		#-----AO stuff----
+		Button(clearaoframe , text='Clear AO s3o', command=self.optimizeaos3o).pack(side=LEFT)
+		Label(clearaoframe, text='Reset all AO data, or list pieces to remove from:').pack(side=LEFT)
+		self.clearaopiecelist = StringVar()
+		Entry(clearaoframe,width=32,textvariable=self.clearaopiecelist).pack(side=LEFT)
+		self.ao_zerolevel = StringVar()
+		self.ao_zerolevel.set("200")
+		Label(clearaoframe, text='Set to:').pack(side=LEFT)
+		Entry(clearaoframe,width=4,textvariable=self.ao_zerolevel).pack(side=LEFT)
+
+
+		Button(printaoframe , text='Print AO information', command=self.printaos3o).pack(side=LEFT)
+
+		self.xnormalpath = StringVar()
+		self.xnormalpath.set("C:\\Program Files\\xNormal\\3.19.3\\x64\\xNormal.exe")
+		Label(xnormalframe, text='Path to xNormal:').pack(side=LEFT)
+		Entry(xnormalframe,width=84,textvariable=self.xnormalpath).pack(side=LEFT)
+
+		Label(aooptsframe, text='Groundplate:').pack(side=LEFT)
+		self.aotype_building = IntVar()
+		Checkbutton(aooptsframe, text='Building (big)', variable=self.aotype_building).pack(side=LEFT)
+		self.aotype_flying = IntVar()
+		Checkbutton(aooptsframe, text='Flying (none)', variable=self.aotype_flying).pack(side=LEFT)
+
+		self.ao_explode = IntVar()
+		Checkbutton(aooptsframe, text='Explode all piecewise', variable=self.ao_explode).pack(side=LEFT)
+
+		self.ao_minclamp = StringVar()
+		self.ao_minclamp.set("0")
+
+		Label(aooptsframe, text='Clamp:').pack(side=LEFT)
+		Entry(aooptsframe, width=4, textvariable=self.ao_minclamp).pack(side=LEFT)
+
+		self.ao_bias = StringVar()
+		self.ao_bias.set("0.0")
+
+		Label(aooptsframe, text='Bias:').pack(side=LEFT)
+		Entry(aooptsframe, width=4, textvariable=self.ao_bias).pack(side=LEFT)
+
+		self.ao_gain = StringVar()
+		self.ao_gain.set("1.0")
+
+		Label(aooptsframe, text='Gain:').pack(side=LEFT)
+		Entry(aooptsframe, width=4, textvariable=self.ao_gain).pack(side=LEFT)
+
+		self.ao_explodepieceslist = StringVar()
+		Label(aooptsframe2, text='List of pieces to explode').pack(side=LEFT)
+		Entry(aooptsframe2, width=76, textvariable=self.ao_explodepieceslist).pack(side=LEFT)
+
+		Button(aooptsframe2 , text='Get', command=self.getpiecelist).pack(side=LEFT)
+
+
+
+		Button(generateaoframe , text='Bake AO with above parameters for (multiple) units', command=self.bakeao).pack(side=BOTTOM)
+
+
+		#--- end AO stuff
+
 		Label(opts3oframe,text='Removes redundant vertices and performs vertex cache optimization').pack(side=LEFT)
 		
 		Button(swaptexframe , text='Override texture', command=self.swaptex).pack(side=LEFT)
@@ -224,6 +207,7 @@ class App:
 						print '[WARN]','Failed to parse transformation parameters, ignoring transformation!'
 						transform=0
 				OBJtoS3O(file, transform,outputfilename,a,b,c,d)
+
 	def opens3o(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile) 
@@ -237,6 +221,7 @@ class App:
 				else:
 					outputfilename=file.lower().replace('.s3o','.obj')
 				S3OtoOBJ(file,outputfilename,self.optimize_for_wings3d.get()==1)
+
 	def optimizes3o(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile) 
@@ -244,13 +229,30 @@ class App:
 			if 's3o' in file.lower():
 				self.initialdir=file.rpartition('/')[0]
 				optimizeS3O(file)
+
 	def optimizeaos3o(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile)
+		piecelist = self.clearaopiecelist.get()
+		piecelist = piecelist.strip().lower().split(',')
+		ao_zerolevel = float(self.ao_zerolevel.get())
 		for file in self.s3ofile:
 			if 's3o' in file.lower():
 				self.initialdir=file.rpartition('/')[0]
-				clearAOS3O(file)
+				print '[INFO]','Clearing AO for',file,'piecelist:',piecelist
+
+	def printaos3o(self):
+		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
+		self.s3ofile = string2list(self.s3ofile)
+		piecelist = self.clearaopiecelist.get()
+		piecelist = piecelist.strip().lower().split(',')
+		ao_zerolevel = float(self.ao_zerolevel.get())
+		for file in self.s3ofile:
+			if 's3o' in file.lower():
+				self.initialdir=file.rpartition('/')[0]
+				print '[INFO]','Clearing AO for',file,'piecelist:',piecelist
+				printAOS3O(file)
+
 	def swaptex(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile) 
@@ -258,6 +260,41 @@ class App:
 			if 's3o' in file.lower():
 				self.initialdir=file.rpartition('/')[0]
 				swaptex(file,self.tex1.get(),self.tex2.get())
+
+	def getpiecelist(self):
+		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
+		self.s3ofile = string2list(self.s3ofile)
+		datafile = open(
+		self.s3ofile[0], 'rb')
+		data = datafile.read()
+		datafile.close()
+		model = S3O(data)
+		def recurse_piecenames(piece):
+			r = [piece.name]
+			for child in piece.children:
+				r += recurse_piecenames(child)
+			return r
+		piecenamelist = recurse_piecenames(model.root_piece)
+		self.ao_explodepieceslist.set(','.join(piecenamelist))
+
+	def bakeao(self):
+		self.s3ofile = tkFileDialog.askopenfilename(initialdir=self.initialdir,
+													filetypes=[('Spring Model file (S3O)', '*.s3o'), ('Any file', '*')],
+													multiple=True)
+		self.s3ofile = string2list(self.s3ofile)
+		explodepiecelist = self.ao_explodepieceslist.get().strip().lower().split(',')
+		for file in self.s3ofile:
+			if 's3o' in file.lower():
+				bakeAOS3O(file,
+						  self.xnormalpath.get(),
+						  isbuilding=bool(self.aotype_building.get()),
+						  isflying=bool(self.aotype_flying.get()),
+						  explode=bool(self.ao_explode.get()),
+						  minclamp=float(self.ao_minclamp.get()),
+						  bias = float(self.ao_bias.get()),
+						  gain = float(self.ao_gain.get()),
+						  explodepieces=explodepiecelist)
+
 def string2list(input_string):
 	if '{' not in input_string:# and input_string.count(':')>1:
 		return input_string
@@ -265,12 +302,14 @@ def string2list(input_string):
 	input_string = input_string.rstrip('}')
 	output = input_string.split('} {')
 	return output
+
 def S3OtoOBJ(filename,outputfilename,optimize_for_wings3d=True):
 	if '.s3o' in filename.lower():
 		data=open(filename,'rb').read()
 		model=S3O(data)
 		model.S3OtoOBJ(outputfilename,optimize_for_wings3d)
 		print '[INFO]',"Succesfully converted", filename,'to',outputfilename
+
 def OBJtoS3O(objfile,transform,outputfilename,a,b,c,d):
 	if '.obj' in objfile.lower():
 		data = open(objfile).readlines()
@@ -301,6 +340,7 @@ def swaptex(filename,tex1,tex2):
 	output_file.write(model.serialize())
 	output_file.close()
 	print '[INFO]',"Succesfully optimized", filename
+
 def optimizeS3O(filename):
 	datafile=open(filename,'rb')
 	data=datafile.read()
@@ -313,29 +353,212 @@ def optimizeS3O(filename):
 	output_file=open(filename,'wb')
 	output_file.write(optimized_data)
 	output_file.close()
-	allbins = model.root_piece.recurse_bin_vertex_ao()
-	print 'bin\t' + '\t'.join(sorted(allbins.keys()))
+	#allbins = model.root_piece.recurse_bin_vertex_ao()
+	#print 'bin\t' + '\t'.join(sorted(allbins.keys()))
 
-	for i in range(0, 256 / 4):
-		print '%i\t' % i + '\t'.join(['%04d' % allbins[k][i] for k in sorted(allbins.keys())])
+	#for i in range(0, 256 / 4):
+	#	print '%i\t' % i + '\t'.join(['%04d' % allbins[k][i] for k in sorted(allbins.keys())])
 
 	print '[INFO]',"Succesfully optimized", filename
 
-def clearAOS3O(filename):
-		datafile = open(filename, 'rb')
-		data = datafile.read()
-		model = S3O(data)
-		pre_vertex_count = countvertices(model.root_piece)
-		recursively_optimize_pieces(model.root_piece)
-		model.root_piece.recurse_clear_vertex_ao()
-		optimized_data = model.serialize()
-		datafile.close()
-		print '[INFO]', 'Number of vertices before optimization:', pre_vertex_count, ' after optimization:', countvertices(
-			model.root_piece)
-		output_file = open(filename, 'wb')
-		output_file.write(optimized_data)
-		output_file.close()
-		print '[INFO]', "Succesfully optimized", filename
+def printAOS3O(filename):
+	datafile = open(filename, 'rb')
+	data = datafile.read()
+	datafile.close()
+	model = S3O(data)
+	print '[INFO]', 'AO data in:',filename
+	model.root_piece.recurse_bin_vertex_ao()
+	print '[INFO]', "Printing done for", filename
+
+def clearAOS3O(filename,piecelist = [], zerolevel = 200):
+	datafile = open(filename, 'rb')
+	data = datafile.read()
+	model = S3O(data)
+	pre_vertex_count = countvertices(model.root_piece)
+	print '[INFO]', 'AO data before clearing:'
+	model.root_piece.recurse_bin_vertex_ao()
+	model.root_piece.recurse_clear_vertex_ao(piecelist = piecelist,zerolevel=zerolevel)
+	print '[INFO]', 'AO data after clearing:'
+	model.root_piece.recurse_bin_vertex_ao(piecelist = piecelist)
+	recursively_optimize_pieces(model.root_piece)
+	optimized_data = model.serialize()
+	datafile.close()
+	print '[INFO]', 'Number of vertices before optimization:', pre_vertex_count, ' after optimization:', countvertices(
+		model.root_piece)
+	output_file = open(filename, 'wb')
+	output_file.write(optimized_data)
+	output_file.close()
+	print '[INFO]', "Succesfully optimized", filename
+
+def delimit(str,a,b):
+	return str.partition(a)[2].partition(b)[0]
+
+def bakeAOS3O(filepath, xnormalpath, isbuilding = False, isflying = False, explode = False, minclamp = 0.0, bias = 0.0, gain = 1.0,explodepieces = []):
+	basename = filepath.rpartition('.')[0]
+	print '=========================working on', basename, '==============================='
+	# check if the unit has a unitdef and if that unit is not a flying unit.
+	# also, make bigger plates for buildings :)
+	isflying = False
+	isbuilding = False
+
+	mys3o = S3O(open(filepath, 'rb').read())
+	objfile = basename + '.obj'
+	mys3o.S3OtoOBJ(objfile, optimize_for_wings3d=False)
+	print basename, 'flying:', isflying, 'building:', isbuilding
+	if not isflying:
+		objfilehandle = open(objfile)
+		objlines = objfilehandle.readlines()
+		objfilehandle.close()
+		vertex_cnt = 0
+		vnormal_cnt = 0
+		uv_cnt = 0
+		boundingbox = [0, 0, 0, 0, 0, 0]  # xmin, xmax, ymin, ymax, zmin, zmax
+
+		def bind(coords, boundingbox):
+			for axis in range(3):
+				boundingbox[2 * axis] = min(boundingbox[2 * axis], coords[axis])
+				boundingbox[2 * axis + 1] = max(boundingbox[2 * axis + 1], coords[axis])
+			return boundingbox
+
+		for line in objlines:
+			if line[0:2] == 'v ':
+				boundingbox = bind([float(f) for f in line[2:].strip().split(' ')], boundingbox)
+				vertex_cnt += 1
+			if line[0:3] == 'vn ':
+				vnormal_cnt += 1
+			if line[0:3] == 'vt ':
+				uv_cnt += 1
+		for axis in range(3):  # expand the bounding box by 1 in each direction.
+			xz_expand = 1
+			if isbuilding and axis != 1:  # dont expand y axis
+				xz_expand = 12
+			boundingbox[2 * axis] = boundingbox[2 * axis] - xz_expand
+			boundingbox[2 * axis + 1] = boundingbox[2 * axis + 1] + xz_expand
+		for vertex in ([(boundingbox[0], boundingbox[2], boundingbox[4]),
+						(boundingbox[0], boundingbox[2], boundingbox[5]),
+						(boundingbox[1], boundingbox[2], boundingbox[5]),
+						(boundingbox[1], boundingbox[2], boundingbox[4])]):
+			objlines.append('v %f %f %f\n' % vertex)
+		for i in range(4):
+			objlines.append('vn %f %f %f\n' % (0, 1, 0))
+			objlines.append('vt %f %f\n' % (0, 0))
+		objlines.append(
+			'f ' + ' '.join(['%i/%i/%i' % (vertex_cnt + i, uv_cnt + i, vnormal_cnt + i) for i in [1, 2, 3]]) + '\n')
+		objlines.append(
+			'f ' + ' '.join(['%i/%i/%i' % (vertex_cnt + i, uv_cnt + i, vnormal_cnt + i) for i in [3, 4, 1]]) + '\n')
+		objfilehandle = open(objfile, 'w')
+		objfilehandle.write(''.join(objlines))
+		objfilehandle.close()
+	if explode:
+		print 'Separating', basename, 'into pieces for AO bake to avoid excessive darkening on hidden pieces'
+		objfilehandle = open(objfile)
+		objlines = objfilehandle.readlines()
+		objfilehandle.close()
+		piececount = -1
+		for line_index in range(len(objlines)):
+			oldline = objlines[line_index]
+			if 'v ' == oldline[0:2]:
+				oldline = oldline.split(' ')  # we are only gonna replace the Y coords with origY+piececount*100
+				objlines[line_index] = 'v %s %f %s' % (
+				oldline[1], float(oldline[2]) + 100.0 * piececount, oldline[3])
+			if 'o ' == oldline[0:2]:
+				piececount += 1
+
+		objfilehandle = open(objfile, 'w')
+		objfilehandle.write(''.join(objlines))
+		objfilehandle.close()
+
+
+	# DO THE XNORMAL:
+	xnormalcmd = '""%s" -aogpu "%s" 0 1.0 pv "%s" 512 512 2048 0.008 0.0 1.0 1.0 1.0 0 2 cpu true 172.0 0.0 0.0 0.0"'%(
+		xnormalpath,
+		basename+'.obj',
+		basename+'.ovb'
+	)
+	print "[INFO]",'xNormal command is:',xnormalcmd
+	os.system(xnormalcmd)
+
+	aovalues = {}
+
+	def parse_ovb_triplet(line):
+		line = line.strip().replace('\"', '').strip('<>/').split(' ')
+		vertex = []
+		for coord in line[1:]:
+			vertex.append(float(coord.partition('=')[2]))
+		return vertex
+
+
+	print  'Working on:', filepath
+	vertdata = []
+	aodata = []
+	ovbfile = open(basename+'.ovb').readlines()
+	aobins = [0 for i in range(256)]
+	vcount = 0
+
+	for line in ovbfile:
+		if '<VPos' in line:
+			vertdata.append(parse_ovb_triplet(line))
+		if '<VCol' in line:
+			aodata.append(parse_ovb_triplet(line))
+	aomax = 0
+	for ao in aodata:
+		aobins[int(sum(ao) / 3)] += 1
+		aomax = max(aomax, aobins[int(sum(ao) / 3)])
+
+	#for aoval in range(256):  # just display it
+		#print aoval, 'O' * int(math.ceil(80 * aobins[aoval] / aomax))
+	print "Number of vertices in each AO bin:",aomax, aobins, 'total=',sum(aobins)
+	# ao
+
+	olds3ofile = open(basename +  '.s3o', 'rb')
+	olds3o = S3O(olds3ofile.read())
+	olds3ofile.close()
+	for i in range(len(aodata)):
+		aodata[i] = sum(aodata[i]) / 3.0
+
+	def recursefoldaoterm(piece, vertex_offset, ignore_these):
+		# global ignorepieces
+		print 'folding ao terms for', piece.name, 'current offset=', vertex_offset
+		ignore = False
+		if piece.name.lower() in ignore_these:
+			print 'ignoring', piece.name
+			ignore = True
+		folded_vert_indices = []
+		for vertex_i in range(len(piece.indices)):
+			if piece.indices[vertex_i] in folded_vert_indices:
+				# print 'already did',piece.indices[vertex_i]
+				continue
+			else:
+				folded_vert_indices.append(piece.indices[vertex_i])
+				vertex = piece.vertices[piece.indices[vertex_i]]
+				# print vertex_offset,len(folded_vert_indices), vertex_i, len(aodata), vertex
+
+				# dont use the entire range, because rounding errors might screw us over later, use only the range from 5-250
+				vertex_ao_value = aodata[len(folded_vert_indices) - 1 + vertex_offset]
+				vertex_ao_value = min(max(minclamp,vertex_ao_value*gain + bias),255)
+				if ignore:
+					vertex_ao_value = 200
+				newuv = (math.floor(vertex[2][0] * 16384.0) / 16384.0 + 1 / 16384.0 * ((vertex_ao_value + 5) / 266.0),
+						 vertex[2][1])
+				# print newuv, vertex
+				vertex = (vertex[0], vertex[1], newuv)
+				piece.vertices[piece.indices[vertex_i]] = vertex
+		print 'finished folding ao terms for', piece.name, 'unique vertex count=', len(folded_vert_indices)
+		vertex_offset += len(folded_vert_indices)
+		for child in piece.children:
+			childoffset = recursefoldaoterm(child, vertex_offset, ignore_these)
+			print 'in child, vertex offset=', vertex_offset, 'child_offset=', childoffset
+			vertex_offset = childoffset
+		return vertex_offset
+
+	# parse bos for spin pieces
+	ignorepieces = explodepieces
+	recursefoldaoterm(olds3o.root_piece, 0, ignorepieces)
+	news3ofile = open(basename + '.s3o', 'wb')
+	news3ofile.write(olds3o.serialize())
+	news3ofile.close()
+	print '[INFO]',"Ding, fries are done!"
+
 def countvertices(piece):
 	numverts=len(piece.vertices)
 	for child in piece.children:

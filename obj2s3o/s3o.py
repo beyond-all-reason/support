@@ -5,6 +5,11 @@ import struct
 import math
 import operator
 import random
+import vertex_cache
+import os
+import sys
+
+
 
 _S3OHeader_struct = struct.Struct("< 12s i 5f 4i")
 _S3OPiece_struct = struct.Struct("< 10i 3f")
@@ -49,6 +54,113 @@ def _get_null_terminated_string(data, offset):
 		return b""
 	else:
 		return data[offset:data.index(b'\x00', offset)]
+
+def get_vertex_ao_value_01(u_channel): #return the shadedness of a vertex, in range [0-1]
+	return (u_channel * 16384.0) % 1
+
+
+def recursively_optimize_pieces(piece):
+	if type(piece.indices) == type ([]) and len(piece.indices)>4:
+		optimize_piece(piece)
+		fix_zero_normals_piece(piece)
+	for child in piece.children:
+		recursively_optimize_pieces(child)
+
+def chunks(l, n):
+	""" Yield successive n-sized chunks from l.
+	"""
+	for i in range(0, len(l), n):
+		yield tuple(l[i:i + n])
+
+
+def optimize_piece(piece):
+	remap = {}
+	new_indices = []
+	print '[INFO]','Optimizing:',piece.name
+	for index in piece.indices:
+		vertex = piece.vertices[index]
+		if vertex not in remap:
+			remap[vertex] = len(remap)
+		new_indices.append(remap[vertex])
+
+	new_vertices = [(index, vertex) for vertex, index in remap.items()]
+	new_vertices.sort()
+	new_vertices = [vertex for index, vertex in new_vertices]
+
+	if piece.primitive_type == "triangles" and len(new_indices) > 0:
+		tris = list(chunks(new_indices, 3))
+		acmr = vertex_cache.average_transform_to_vertex_ratio(tris)
+
+		tmp = vertex_cache.get_cache_optimized_triangles(tris)
+		acmr_new = vertex_cache.average_transform_to_vertex_ratio(tmp)
+		if acmr_new < acmr:
+			new_indices = []
+			for tri in tmp:
+				new_indices.extend(tri)
+
+	vertex_map = []
+	remapped_indices = []
+	for index in new_indices:
+		try:
+			new_index = vertex_map.index(index)
+		except ValueError:
+			new_index = len(vertex_map)
+			vertex_map.append(index)
+
+		remapped_indices.append(new_index)
+
+	new_vertices = [new_vertices[index] for index in vertex_map]
+	new_indices = remapped_indices
+
+	piece.indices = new_indices
+	piece.vertices = new_vertices
+
+
+##if there are zero vertices, the emit direction is 0,0,1, the emit position is the origin of the piece
+##if there is 1 vertex, the emit dir is the vector from the origin to the the position of the first vertex the emit position is the origin of the piece
+## if there is more than one, then the emit vector is the vector pointing from v[0] to v[1], and the emit position is v[0]
+def fix_zero_normals_piece(piece):
+	badnormals = 0
+	fixednormals = 0
+	nonunitnormals = 0
+	if len(piece.indices) > 0:
+
+		for v_i in range(len(piece.vertices)):
+			vertex = piece.vertices[v_i]
+			# print (vertex[1])
+			normallength = vectorlength(vertex[1])
+			if normallength < 0.01:  # nearly 0 normal
+				badnormals += 1
+				if v_i not in piece.indices:
+					# this is some sort of degenerate vertex, just replace it's normal with [0,1,0]
+					piece.vertices[v_i] = (vertex[0], (0.0, 1.0, 0.0), vertex[2])
+					fixednormals += 1
+				else:
+					for f_i in range(0, len(piece.indices), 3):
+						if v_i in piece.indices[f_i:min(len(piece.indices), f_i + 3)]:
+							newnormal = vectorcross(vectorminus(piece.vertices[piece.indices[f_i + 1]][0],
+																piece.vertices[piece.indices[f_i]][0]),
+													vectorminus(piece.vertices[piece.indices[f_i + 2]][0],
+																piece.vertices[piece.indices[f_i]][0]))
+							if vectorlength(newnormal) < 0.001:
+								piece.vertices[v_i] = (vertex[0], (0.0, 1.0, 0.0), vertex[2])
+							else:
+								piece.vertices[v_i] = (vertex[0], normalize(newnormal), vertex[2])
+							fixednormals += 1
+							break
+			elif normallength < 0.9 or normallength > 1.1:
+				nonunitnormals += 1
+				piece.vertices[v_i] = (vertex[0], normalize(vertex[1]), vertex[2])
+	if badnormals > 0:
+		print '[WARN]', 'Bad normals:', badnormals, 'Fixed:', fixednormals
+		if badnormals != fixednormals:
+			print	'[WARN]', 'NOT ALL ZERO NORMALS fixed!!!!!'  # this isnt possible with above code anyway :/
+	if nonunitnormals > 0:
+		print '[WARN]', nonunitnormals, 'fixed to unit length'
+
+
+# for child in piece.children:
+# fix_zero_normals_piece(child)
 
 
 class S3O(object):
@@ -160,7 +272,7 @@ class S3O(object):
 								v[0][0] + offset[0] + piece.parent_offset[0], v[0][1] + offset[1] + piece.parent_offset[1],
 								v[0][2] + offset[2] + piece.parent_offset[2]))
 						vdata_obj.append('vn %f %f %f\n' % (v[1][0], v[1][1], v[1][2]))
-						vdata_obj.append('vt %f %f\n' % (v[2][0], v[2][1]))
+						vdata_obj.append('vt %.9f %.9f\n' % (v[2][0], v[2][1]))
 						nti += 1
 						facestr += ' %i/%i/%i' % (vi + hash[closest], nti, nti)
 
@@ -176,7 +288,7 @@ class S3O(object):
 								v[0][0] + offset[0] + piece.parent_offset[0], v[0][1] + offset[1] + piece.parent_offset[1],
 								v[0][2] + offset[2] + piece.parent_offset[2]))
 						vdata_obj.append('vn %f %f %f\n' % (v[1][0], v[1][1], v[1][2]))
-						vdata_obj.append('vt %f %f\n' % (v[2][0], v[2][1]))
+						vdata_obj.append('vt %.9f %.9f\n' % (v[2][0], v[2][1]))
 						nti += 1
 						# if 1==1: #closest>=piece.indices[k+i]: #no matching vert
 
@@ -512,7 +624,7 @@ class S3O(object):
 
 			for pieceindex in range(len(self.root_piece.children)):
 				piece = self.root_piece.children[pieceindex]
-				if piece.parent == self.root_piece:
+				if piece.parent == self.root_piece and piece.parent != newroot:
 					print '[WARN]', 'Piece', piece.name, 'is not in the encoded hierarchy, adding it as a child of root piece:', newroot.name
 					piecedict[newroot.name].children.append(piece)
 					piece.parent = piecedict[newroot.name]
@@ -605,19 +717,34 @@ class S3OPiece(object):
 				child_offset, = _S3OChildOffset_struct.unpack_from(data, cur_offset)
 				self.children.append(S3OPiece(data, child_offset, self))
 
-	def recurse_bin_vertex_ao(self,allbins = {}):
-		aobins = {}
-		for i in range(0,256/4):
-			aobins[i] = 0
-		for i, vertex in enumerate(self.vertices):
-			vertex_ao_value = (math.floor(vertex[2][0] * 16384.0) / 16384.0 )* 255.0
-			aobins[int(vertex_ao_value)/4] +=1
-			print "AO value for piece",self.name,i,vertex_ao_value
-		for i in range(0, 256/4):
-			print '%04i %04i'%(i,aobins[i])
-		allbins[self.name] = aobins
+	def recurse_bin_vertex_ao(self,allbins = {},piecelist = []):
+		if piecelist == [] or self.name.lower() in piecelist:
+			aobins = {}
+			aovalues = []
+			for i in range(0,256/4):
+				aobins[i] = 0
+			for i, vertex in enumerate(self.vertices):
+				#vertex_ao_value = (math.floor(vertex[2][0] * 16384.0) / 16384.0 )* 255.0
+				vertex_ao_value = get_vertex_ao_value_01(vertex[2][0]) * 255.0
+				aovalues.append(vertex_ao_value)
+				aobins[(int(vertex_ao_value)/4)%64] +=1
+				#print "AO value for piece",self.name,i,vertex_ao_value
+			#for i in range(0, 256/4):
+				#print '%04i %04i'%(i,aobins[i])
+			allbins[self.name] = aobins
+			if len(self.vertices)> 4:
+				meanao = sum(aovalues)/float(len(aovalues))
+				print 'Piece %s has %d vertices, AO range = [%d - %d], AO mean = %d, AO spread = %d'%(
+					self.name,
+					len(aovalues),
+					min(aovalues),
+					max(aovalues),
+					meanao,
+					sum([abs(ao - meanao) for ao in aovalues])/len(aovalues)
+				)
+
 		for child in self.children:
-			child.recurse_bin_vertex_ao(allbins = allbins)
+			child.recurse_bin_vertex_ao(allbins = allbins,piecelist= piecelist)
 
 		return allbins
 		#if aobins[0] ==0 and aobins[256/4-1] == 0 :
@@ -625,18 +752,20 @@ class S3OPiece(object):
 		#else:
 		#	return False
 
-	def recurse_clear_vertex_ao(self,zerolevel=200):
-
-		for i, vertex in enumerate(self.vertices):
-			vertex_ao_value = zerolevel
-			newuv = (
-			math.floor(vertex[2][0] * 16384.0) / 16384.0 + (1 / 16384.0 )* ((vertex_ao_value + 5) / 266.0), vertex[2][1])
-			# print newuv, vertex
-			vertex = (vertex[0], vertex[1], newuv)
-			self.vertices[i] = vertex
-		print "[INFO]","Set all vertex ao terms to 200 in piece", self.name
+	def recurse_clear_vertex_ao(self,zerolevel=200,piecelist = []):
+		if piecelist == [] or self.name.lower() in piecelist:
+			for i, vertex in enumerate(self.vertices):
+				vertex_ao_value = (1 / 16384.0 )* ((zerolevel + 5) / 266.0)
+				newuv = (
+					math.floor(vertex[2][0] * 16384.0) / 16384.0 + vertex_ao_value,
+					vertex[2][1]
+				)
+				# print newuv, vertex
+				vertex = (vertex[0], vertex[1], newuv)
+				self.vertices[i] = vertex
+			print "[INFO]","Set all vertex ao terms to 200 in piece", self.name,piecelist
 		for child in self.children:
-			child.recurse_clear_vertex_ao(zerolevel=zerolevel)
+			child.recurse_clear_vertex_ao(zerolevel=zerolevel,piecelist=piecelist)
 
 	def serialize(self, offset):
 		name_offset = _S3OPiece_struct.size + offset
