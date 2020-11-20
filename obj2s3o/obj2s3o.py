@@ -77,7 +77,7 @@ class App:
 		Button(opts3oframe , text='Optimize s3o', command=self.optimizes3o).pack(side=LEFT)
 
 		#-----AO stuff----
-		Button(clearaoframe , text='Clear AO s3o', command=self.optimizeaos3o).pack(side=LEFT)
+		Button(clearaoframe , text='Clear AO s3o', command=self.clearaos3o).pack(side=LEFT)
 		Label(clearaoframe, text='Reset all AO data, or list pieces to remove from:').pack(side=LEFT)
 		self.clearaopiecelist = StringVar()
 		Entry(clearaoframe,width=32,textvariable=self.clearaopiecelist).pack(side=LEFT)
@@ -230,16 +230,18 @@ class App:
 				self.initialdir=file.rpartition('/')[0]
 				optimizeS3O(file)
 
-	def optimizeaos3o(self):
+	def clearaos3o(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
 		self.s3ofile = string2list(self.s3ofile)
 		piecelist = self.clearaopiecelist.get()
 		piecelist = piecelist.strip().lower().split(',')
+		if piecelist == ['']:
+			piecelist = []
 		ao_zerolevel = float(self.ao_zerolevel.get())
 		for file in self.s3ofile:
 			if 's3o' in file.lower():
-				self.initialdir=file.rpartition('/')[0]
 				print '[INFO]','Clearing AO for',file,'piecelist:',piecelist
+				clearAOS3O(file, piecelist=piecelist, zerolevel=ao_zerolevel)
 
 	def printaos3o(self):
 		self.s3ofile = tkFileDialog.askopenfilename(initialdir= self.initialdir,filetypes = [('Spring Model file (S3O)','*.s3o'),('Any file','*')], multiple = True)
@@ -283,6 +285,8 @@ class App:
 													multiple=True)
 		self.s3ofile = string2list(self.s3ofile)
 		explodepiecelist = self.ao_explodepieceslist.get().strip().lower().split(',')
+		if explodepiecelist == ['']:
+			explodepiecelist = []
 		for file in self.s3ofile:
 			if 's3o' in file.lower():
 				bakeAOS3O(file,
