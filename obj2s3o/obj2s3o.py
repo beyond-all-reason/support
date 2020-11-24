@@ -402,8 +402,6 @@ def bakeAOS3O(filepath, xnormalpath, isbuilding = False, isflying = False, explo
 	print '=========================working on', basename, '==============================='
 	# check if the unit has a unitdef and if that unit is not a flying unit.
 	# also, make bigger plates for buildings :)
-	isflying = False
-	isbuilding = False
 
 	mys3o = S3O(open(filepath, 'rb').read())
 	objfile = basename + '.obj'
@@ -568,6 +566,75 @@ def countvertices(piece):
 	for child in piece.children:
 		numverts+=countvertices(child)
 	return numverts
+
+#def swaptex(filename,tex1,tex2):
+chickenlist = """chicken2b.s3o	chicken_apex_m_color.dds	chicken_m_other.png
+h_chickenq.s3o	chicken_apex_large_color.dds	chicken_large_other.png
+chickenc.s3o	chicken_aqua_m_color.dds	chicken_m_other.png
+big_chicken_dodo.s3o	chicken_black_m_color.dds	chicken_m_other.png
+chickenc2.s3o	chicken_black_m_color.dds	chicken_m_other.png
+chicken_listener.s3o	chicken_black_m_color.dds	chicken_m_other.png
+epic_chickenq.s3o	chicken_black_large_color.dds	chicken_large_other.png
+chickenr.s3o	chicken_blue_s_color.dds	chicken_s_other.png
+chickenr.s3o	chicken_blue_s_color.dds	chicken_s_other.png
+chicken_colonizer.s3o	chicken_blue_l_color.dds	chicken_l_other.png
+e_chickenq.s3o	chicken_brown_l_color.dds	chicken_l_other.png
+chicken.s3o	chicken_1_s_color.dds	chicken_s_other.png
+chicken_pidgeon.s3o	chicken_1_m_color.dds	chicken_m_other.png
+chicken1b.s3o	chicken_1b_s_color.dds	chicken_s_other.png
+chicken_pidgeonb.s3o	chicken_1b_m_color.dds	chicken_m_other.png
+chicken1c.s3o	chicken_1c_s_color.dds	chicken_s_other.png
+chicken_pidgeonc.s3o	chicken_1c_m_color.dds	chicken_m_other.png
+chicken1d.s3o	chicken_1d_s_color.dds	chicken_s_other.png
+chicken_pidgeond.s3o	chicken_1d_m_color.dds	chicken_m_other.png
+chicken1x.s3o	chicken_1x_s_color.dds	chicken_s_other.png
+chicken1y.s3o	chicken_1y_s_color.dds	chicken_s_other.png
+chicken1z.s3o	chicken_1z_s_color.dds	chicken_s_other.png
+chickenc3.s3o	chicken_c3_s_color.dds	chicken_s_other.png
+chickenc3b.s3o	chicken_c3b_s_color.dds	chicken_s_other.png
+chickenc3c.s3o	chicken_c3c_s_color.dds	chicken_s_other.png
+s_chicken_white.s3o	chicken_crimson_s_color.dds	chicken_s_other.png
+chickenq.s3o	chicken_crimson_large_color.dds	chicken_large_other.png
+chickens.s3o	chicken_green_m_color.dds	chicken_m_other.png
+spiker_gunship.s3o	chicken_green_m_color.dds	chicken_m_other.png
+s_chickenboss_white.s3o	chicken_multi_l_color.dds	chicken_l_other.png
+chicken2.s3o	chicken_pink_m_color.dds	chicken_m_other.png
+chicken_dodo.s3o	chicken_red_s_color.dds	chicken_s_other.png
+chickena.s3o	chicken_red_l_color.dds	chicken_l_other.png
+chickenab.s3o	chicken_redb_l_color.dds	chicken_l_other.png
+chickena2b.s3o	chicken_redb_l_color.dds	chicken_l_other.png
+s_chickenboss2_white.s3o	chicken_redb_l_color.dds	chicken_l_other.png
+chickenac.s3o	chicken_redc_l_color.dds	chicken_l_other.png
+chickena2.s3o	chicken_redc_l_color.dds	chicken_l_other.png
+brain_bug.s3o	chicken_redhead4_l_color.dds	chicken_l_other.png
+chicken_crow.s3o	chicken_vcrimson_m_color.dds	chicken_m_other.png
+vh_chickenq.s3o	chicken_vcrimson_large_color.dds	chicken_large_other.png
+ve_chickenq.s3o	chicken_white_large_color.dds	chicken_large_other.png
+chickenf1.s3o	chicken_white_m_color.dds	chicken_m_other.png
+chicken_drone.s3o	chicken_white_s_color.dds	chicken_s_other.png
+chicken_droneb.s3o	chicken_whitehc_s_color.dds	chicken_s_other.png
+chickenf.s3o	chicken_yellow_l_color.dds	chicken_l_other.png
+chickens2.s3o	chicken_yellow_m_color.dds	chicken_m_other.png
+chickenf1b.s3o	chicken_yellowb_l_color.dds	chicken_l_other.png"""
+
+flyers = """chicken_crow.s3o
+chicken_pidgeon.s3o
+chicken_pidgeonb.s3o
+chicken_pidgeonc.s3o
+chicken_pidgeond.s3o
+chickenf1.s3o
+chickenf1b.s3o
+spiker_gunship.s3o
+chickenf.s3o"""
+'''
+flyers = flyers.split('\n')
+for line in chickenlist.split('\n'):
+	linesp = line.strip().split('\t')
+	path = ("C:/Users/Peti/Documents/my games/Spring/games/Beyond-All-Reason.sdd/objects3d/Chickens/"+linesp[0])
+	swaptex(path, linesp[1],linesp[2])
+	bakeAOS3O(path,"C:\\Program Files\\xNormal\\3.19.3\\x64\\xNormal.exe",isflying= (linesp[0] in flyers))
+exit(1)
+'''
 root = Tk()
 app = App(root)
 root.mainloop()
