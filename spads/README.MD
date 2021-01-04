@@ -27,32 +27,37 @@ Updated with rclone from google drive folder:
 
 # rclone installation
 
-sudo apt-get install rclone
-rclone config
-select new
-name: BYAR-maps
-storage type: 13 (drive)
-no client id
-no client secret
-access type: 2 (drive.readonly)
-root folder id: blank
-service account credentials: blank
-service accoutn file: blank
-Edit advanced config: n
-Use auto config: n
-Configure this as team drive: n
-
+- sudo apt-get install rclone
+- rclone config
+- select new
+- name: BYAR-maps
+- storage type: 13 (drive)
+- no client id
+- no client secret
+- access type: 2 (drive.readonly)
+- root folder id: blank
+- service account credentials: blank
+- service accoutn file: blank
+- Edit advanced config: n
+- Use auto config: n
+- Configure this as team drive: n
+ 
 Then to update maps:
+
 rclone sync --drive-shared-with-me BYAR-maps:BYAR-maps /home/xxxx/spads/var/spring/data/maps/
 
 copy the relevant .timer and .service files into, 
+
 /etc/systemd/system 
+
 and make sure they contain the correct paths to executables and data storage, and the User names are correct!
 
 https://opensource.com/article/20/7/systemd-timers
 
 systemctl status rclone-maps.service
+
 systemctl start rclone-maps.service 
+
 systemctl enable rclone-maps.timer
 
 # Game
@@ -60,18 +65,23 @@ systemctl enable rclone-maps.timer
 install pr-downloader by copying pr-downloader from an engine build into /usr/local/bin
 
 copy the relevant .timer and .service files into:
+
 /etc/systemd/system/
+
 Make sure the username and executable path and data storage path is correct
 
 https://opensource.com/article/20/7/systemd-timers
 
-systemctl status rclone-maps.service
-systemctl start rclone-maps.service 
-systemctl enable rclone-maps.timer
+systemctl status pr-downloader.service
+
+systemctl start pr-downloader.service 
+
+systemctl enable pr-downloader.timer
 
 ## SPADS:
 
 Make sure instancedir and instancedir/log exists (e.g. /spads/var/spads_host01/log)
+
 Disable plugins if not installed (autoloadplugins in spads.conf)
 
 
