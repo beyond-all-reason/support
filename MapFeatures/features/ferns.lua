@@ -20,7 +20,6 @@ local Base = {
 		normalmaps = "yes",
 		normaltex = "unittextures/fernsn.tga",
 		treeshader = "no",
-
 		randomrotate = "true",
 	},
 }
