@@ -678,7 +678,7 @@ class S3OPiece(object):
 	# for l in data:
 	# if l[0]=='o':
 
-	def __init__(self, data, offset, parent=None):
+	def __init__(self, data, offset, parent=None, name = "base"):
 		if data != '':
 			piece = _S3OPiece_struct.unpack_from(data, offset)
 
@@ -716,7 +716,14 @@ class S3OPiece(object):
 				cur_offset = children_offset + _S3OChildOffset_struct.size * i
 				child_offset, = _S3OChildOffset_struct.unpack_from(data, cur_offset)
 				self.children.append(S3OPiece(data, child_offset, self))
-
+		else:
+			self.parent = None
+			self.name = name
+			self.primitive_type = "triangles"
+			self.parent_offset = (0.0,0.0,0.0)
+			self.vertices = []
+			self.indices = []
+			self.children = []
 	def recurse_bin_vertex_ao(self,allbins = {},piecelist = []):
 		if piecelist == [] or self.name.lower() in piecelist:
 			aobins = {}
