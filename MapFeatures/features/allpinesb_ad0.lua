@@ -29,14 +29,14 @@ local featureDef =	{
 		treeshader = "yes",
 		randomrotate = "true",
 	},
-},
+}
 
 local allpinesb = {}
 
 for _,treecolor in pairs({'green','brown','snow','snowgreen'}) do
 	for _,treetype in pairs ({'a','b','c'}) do
 		for sizeidx,treesize in pairs({'xs','s','m','l','xl','xxl'}) do 
-			local name = 'allpinesb_ad0_' ..treecolor .. '_' .. treetype .. '_' treesize --allpinesb_ad0_green_c_xl
+			local name = 'allpinesb_ad0_' ..treecolor .. '_' .. treetype .. '_' .. treesize --allpinesb_ad0_green_c_xl
 			local def = {}
 			for k, v in pairs(featureDef) do
 				def[k] = v
