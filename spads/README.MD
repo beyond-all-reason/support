@@ -54,11 +54,15 @@ and make sure they contain the correct paths to executables and data storage, an
 
 https://opensource.com/article/20/7/systemd-timers
 
+systemctl daemon-reload
+
 systemctl status rclone-maps.service
 
 systemctl start rclone-maps.service 
 
-systemctl enable rclone-maps.timer
+systemctl enable --now rclone-maps.timer
+
+Use --now to not wait till next reboot
 
 # Game
 
@@ -72,17 +76,18 @@ Make sure the username and executable path and data storage path is correct
 
 https://opensource.com/article/20/7/systemd-timers
 
+systemctl daemon-reload
+
 systemctl status pr-downloader.service
 
 systemctl start pr-downloader.service 
 
-systemctl enable pr-downloader.timer
+systemctl enable --now pr-downloader.timer
 
 ## SPADS:
 
 Make sure instancedir and instancedir/log exists (e.g. /spads/var/spads_host01/log)
 
 Disable plugins if not installed (autoloadplugins in spads.conf)
-
 
 
