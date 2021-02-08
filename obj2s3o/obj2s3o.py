@@ -618,10 +618,12 @@ def bakeAOPlateS3O(filepath, xnormalpath, sizex = 5, sizez = 5, resolution= 128)
 				p = min(p, p*y/ythres)
 			if (y > h-ythres):
 				p = min(p, p*(h-y)/ythres)
-			print (p)
+			#print (p)
 			p= int(p)
 			outrows[x] += [0,0,0,p]
 	outpngwriter.write(outpngfilehandle,outrows)
+	outpngfilehandle.close()
+
 
 	#--------------------- compress to dds------------------------
 	cmd='nvdxt -dxt5 -quality_highest -file "%s"'%(basename+"_aoplane.png")
