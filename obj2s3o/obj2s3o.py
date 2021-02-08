@@ -7,6 +7,7 @@ from Tkinter import *
 import tkFileDialog
 import math
 import os
+from tooltip import Tooltip
 
 howtoemit=('''const unsigned int count = piece->GetVertexCount();
 
@@ -71,72 +72,107 @@ class App:
 		aooptsframe2.pack(side=TOP,fill=X)
 
 		swaptexframe.pack(side=TOP,fill=X)
-		Button(frame, text="QUIT", fg="red", command=frame.quit).pack(side=TOP)
-		
+		quitbutton = Button(frame, text="QUIT", fg="red", command=frame.quit)
+		quitbutton.pack(side=TOP)
+		Tooltip(quitbutton, text = "Quit the application", wraplength=200)
+
 		self.prompts3ofilename=IntVar()
-		Button(opts3oframe , text='Optimize s3o', command=self.optimizes3o).pack(side=LEFT)
+		optimizes3obutton = Button(opts3oframe , text='Optimize s3o', command=self.optimizes3o)
+		optimizes3obutton.pack(side=LEFT)
+		Tooltip(optimizes3obutton,text = "Select an S3O file, and clean up redundant vertices, perform vertex cache optimization and fix null normals. Modifies S3O file in place.", wraplength= 400)
+
+		Label(opts3oframe,text='Removes redundant vertices and performs vertex cache optimization').pack(side=LEFT)
 
 		#-----AO stuff----
-		Button(clearaoframe , text='Clear AO s3o', command=self.clearaos3o).pack(side=LEFT)
+		clearaos3obutton = Button(clearaoframe , text='Clear AO s3o', command=self.clearaos3o)
+		clearaos3obutton.pack(side=LEFT)
+		Tooltip(clearaos3obutton,
+				text="If no list is specified, resets all vertex ambient ambient occlusion data in-place. If list is specified, then AO data will only removed from those pieces. Use this to clear AO from spinning or fully occluded pieces.",
+				wraplength=400)
+
 		Label(clearaoframe, text='Reset all AO data, or list pieces to remove from:').pack(side=LEFT)
+
 		self.clearaopiecelist = StringVar()
-		Entry(clearaoframe,width=32,textvariable=self.clearaopiecelist).pack(side=LEFT)
+		clearaopiecelistentry = Entry(clearaoframe,width=32,textvariable=self.clearaopiecelist)
+		clearaopiecelistentry.pack(side=LEFT)
+		Tooltip(clearaopiecelistentry,text="A comma separated list of pieces to remove AO data from.", wraplength=200)
+
 		self.ao_zerolevel = StringVar()
 		self.ao_zerolevel.set("200")
 		Label(clearaoframe, text='Set to:').pack(side=LEFT)
-		Entry(clearaoframe,width=4,textvariable=self.ao_zerolevel).pack(side=LEFT)
+		aozerolevelentry = Entry(clearaoframe,width=4,textvariable=self.ao_zerolevel)
+		aozerolevelentry.pack(side=LEFT)
+		Tooltip(aozerolevelentry,text="What AO value to reset to, where 0 is fully black, 255 is fully white and ~200 is default.")
 
-
-		Button(printaoframe , text='Print AO information', command=self.printaos3o).pack(side=LEFT)
+		printaos3obutton = Button(printaoframe , text='Print AO information', command=self.printaos3o)
+		printaos3obutton.pack(side=LEFT)
+		Tooltip(printaos3obutton, text = "Prints information about the AO data preset in a model to console. For developers and debugging.")
 
 		self.xnormalpath = StringVar()
 		self.xnormalpath.set("C:\\Program Files\\xNormal\\3.19.3\\x64\\xNormal.exe")
 		Label(xnormalframe, text='Path to xNormal:').pack(side=LEFT)
-		Entry(xnormalframe,width=84,textvariable=self.xnormalpath).pack(side=LEFT)
+		xnormalpathentry = Entry(xnormalframe,width=84,textvariable=self.xnormalpath)
+		xnormalpathentry.pack(side=LEFT)
+		Tooltip(xnormalpathentry,text="Set your path to xNormal.exe here. Sorry this is not remembered on relaunch. Its easier if you just install xnormal to the default path.")
 
 		Label(aooptsframe, text='Groundplate:').pack(side=LEFT)
 		self.aotype_building = IntVar()
-		Checkbutton(aooptsframe, text='Building (big)', variable=self.aotype_building).pack(side=LEFT)
+		aotypebuildingcheckbutton = Checkbutton(aooptsframe, text='Building (big)', variable=self.aotype_building)
+		aotypebuildingcheckbutton.pack(side=LEFT)
+		Tooltip(aotypebuildingcheckbutton,text = "Enable this when baking AO for buildings. This puts a larger than normal groundplate underneath the unit, to make sure the building is only lit from the top hemisphere.")
+
 		self.aotype_flying = IntVar()
-		Checkbutton(aooptsframe, text='Flying (none)', variable=self.aotype_flying).pack(side=LEFT)
+		aotypeflyingcheckbutton = Checkbutton(aooptsframe, text='Flying (none)', variable=self.aotype_flying)
+		aotypeflyingcheckbutton.pack(side=LEFT)
+		Tooltip(aotypeflyingcheckbutton,text="Use for aircraft, this remove the groundplate from under the unit, so it can get lit from all directions.")
 
 		self.ao_explode = IntVar()
-		Checkbutton(aooptsframe, text='Explode all piecewise', variable=self.ao_explode).pack(side=LEFT)
+		aoexplodecheckbutton = Checkbutton(aooptsframe, text='Explode all piecewise', variable=self.ao_explode)
+		aoexplodecheckbutton.pack(side=LEFT)
+		Tooltip(aoexplodecheckbutton,text="Move ALL pieces in a model far away from each other, so they dont occlude each other. Use this for cars with wheels, or for models that open and unfold.")
 
 		self.ao_minclamp = StringVar()
 		self.ao_minclamp.set("0")
-
 		Label(aooptsframe, text='Clamp:').pack(side=LEFT)
-		Entry(aooptsframe, width=4, textvariable=self.ao_minclamp).pack(side=LEFT)
+		aominclampentry = Entry(aooptsframe, width=4, textvariable=self.ao_minclamp)
+		aominclampentry.pack(side=LEFT)
+		Tooltip(aominclampentry,text="The darkest possible level AO shading will go to. 0 means even the darkes is allowed, 255 means that everything will be full white. 128 is good if you dont want peices to go too dark")
 
 		self.ao_bias = StringVar()
 		self.ao_bias.set("0.0")
-
 		Label(aooptsframe, text='Bias:').pack(side=LEFT)
-		Entry(aooptsframe, width=4, textvariable=self.ao_bias).pack(side=LEFT)
+		aobiasentry = Entry(aooptsframe, width=4, textvariable=self.ao_bias)
+		aobiasentry.pack(side=LEFT)
+		Tooltip(aobiasentry,text="Add this much to every vertex AO value, positive values brighten, negative values darken. Sane range [-255;255] ")
 
 		self.ao_gain = StringVar()
 		self.ao_gain.set("1.0")
-
 		Label(aooptsframe, text='Gain:').pack(side=LEFT)
-		Entry(aooptsframe, width=4, textvariable=self.ao_gain).pack(side=LEFT)
+		aogainentry = Entry(aooptsframe, width=4, textvariable=self.ao_gain)
+		aogainentry.pack(side=LEFT)
+		Tooltip(aogainentry, text= "Multiply calculated AO terms with this value. A value of 2.0 would double the brightness of each value, 0.5 would half it. AO_out = min(255, max(clamp, AO_in * bias + gain)) ")
 
 		self.ao_explodepieceslist = StringVar()
 		Label(aooptsframe2, text='List of pieces to explode').pack(side=LEFT)
-		Entry(aooptsframe2, width=76, textvariable=self.ao_explodepieceslist).pack(side=LEFT)
+		aoexplodepieceslistentry = Entry(aooptsframe2, width=76, textvariable=self.ao_explodepieceslist)
+		aoexplodepieceslistentry.pack(side=LEFT)
+		Tooltip(aoexplodepieceslistentry,text="Comma separated list of pieces that should not be occluded by other pieces")
 
-		Button(aooptsframe2 , text='Get', command=self.getpiecelist).pack(side=LEFT)
+		getpiecelistbutton = Button(aooptsframe2 , text='Get', command=self.getpiecelist)
+		getpiecelistbutton.pack(side=LEFT)
+		Tooltip(getpiecelistbutton,text = "Load the list of pieces from an S3O model")
 
-
-
-		Button(generateaoframe , text='Bake AO with above parameters for (multiple) units', command=self.bakeao).pack(side=BOTTOM)
-
+		bakeaobutton = Button(generateaoframe , text='Bake AO with above parameters for (multiple) units', command=self.bakeao)
+		bakeaobutton.pack(side=BOTTOM)
+		Tooltip(bakeaobutton,text="Load (multiple) S3O files, and perform the AO baking, modifying the S3O files in-place")
 
 		#--- end AO stuff
 
-		Label(opts3oframe,text='Removes redundant vertices and performs vertex cache optimization').pack(side=LEFT)
 		
-		Button(swaptexframe , text='Override texture', command=self.swaptex).pack(side=LEFT)
+		swaptexbutton = Button(swaptexframe , text='Override texture', command=self.swaptex)
+		swaptexbutton.pack(side=LEFT)
+		Tooltip(swaptexbutton,text="Change only the textures of (multiple) S3O files, to the ones specified in Tex1 and Tex2")
+
 		Label(swaptexframe,text='Tex1:').pack(side=LEFT)
 		self.tex1=StringVar()
 		Entry(swaptexframe,width=20,textvariable=self.tex1).pack(side=LEFT)
@@ -144,42 +180,62 @@ class App:
 		self.tex2=StringVar()
 		Entry(swaptexframe,width=20,textvariable=self.tex2).pack(side=LEFT)
 		
-		Button(objtos3oframe , text='Convert OBJ to S3O', command=self.openobj).pack(side=LEFT)
-		Checkbutton(objtos3oframe,text='Prompt output filename', variable=self.prompts3ofilename).pack(side=LEFT)
+		openobjbutton = Button(objtos3oframe , text='Convert OBJ to S3O', command=self.openobj)
+		openobjbutton.pack(side=LEFT)
+		Tooltip(openobjbutton, text = "Choose any mymodel.OBJ file(s), and convert them into mymodel.S3O. Each object in an OBJ file will be a separate piece in the S3O file. If the OBJ file was created by this tool, and the object names were left intact, you will retain all piece hiearchy and origins information.")
+
+		prompts3ofilenamecheckbutton = Checkbutton(objtos3oframe,text='Prompt output filename', variable=self.prompts3ofilename)
+		prompts3ofilenamecheckbutton.pack(side=LEFT)
+		Tooltip(prompts3ofilenamecheckbutton,text = "Allows you to choose what name you want to save your S3O file as.")
 		
-		
-		Button(s3otoobjframe , text='Convert S3O to OBJ', command=self.opens3o).pack(side=LEFT)		
+		opens3obutton = Button(s3otoobjframe , text='Convert S3O to OBJ', command=self.opens3o)
+		opens3obutton.pack(side=LEFT)
+		Tooltip(opens3obutton,text="Convert mymodel.S3O into and editable mymodel.OBJ, while keeping all S3O information in the object names.")
+
 		self.optimize_for_wings3d=IntVar()
 		self.optimize_for_wings3d.set(1)
-		
-		Checkbutton(s3otoobjframe,text='Optimize for Wings3d', variable=self.optimize_for_wings3d).pack(side=LEFT)
+		optimizeforwingscheckbutton = Checkbutton(s3otoobjframe,text='Optimize for Wings3d', variable=self.optimize_for_wings3d)
+		optimizeforwingscheckbutton.pack(side=LEFT)
+		Tooltip(optimizeforwingscheckbutton,text="This should be ON, and it specifies hard/soft edges via .obj smoothing group operators, and ensures mesh continuity across triangles")
 
 		self.promptobjfilename=IntVar()
-
-		Checkbutton(s3otoobjframe,text='Prompt output filename', variable=self.promptobjfilename).pack(side=LEFT)
+		promptobjfilenamecheckbutton = Checkbutton(s3otoobjframe,text='Prompt output filename', variable=self.promptobjfilename)
+		promptobjfilenamecheckbutton.pack(side=LEFT)
+		Tooltip(promptobjfilenamecheckbutton,text = "Allows you to choose what name you want to save your OBJ file as.")
 		
 		self.transform=IntVar()
-		Checkbutton(objtos3oframe,text='Transform UV coords:', variable=self.transform).pack(side=LEFT)
-		
+		transformcheckbutton = Checkbutton(objtos3oframe,text='Transform UV coords:', variable=self.transform)
+		transformcheckbutton.pack(side=LEFT)
+		Tooltip(transformcheckbutton, text = "Perform a linear transformation of the UV space of a model when converting S3O to OBJ")
+
 		Label(objtos3oframe,text='U=').pack(side=LEFT)
 		self.transformA=StringVar()
-		Entry(objtos3oframe,width=4,textvariable=self.transformA).pack(side=LEFT)
+		transformaentry = Entry(objtos3oframe,width=4,textvariable=self.transformA)
+		transformaentry.pack(side=LEFT)
+		Tooltip(transformaentry, text="How much to multiply all U (horizontal) coordinates with")
 		self.transformA.set('1')
 		
 		Label(objtos3oframe,text='* U +').pack(side=LEFT)
 		self.transformB=StringVar()
-		Entry(objtos3oframe,width=4,textvariable=self.transformB).pack(side=LEFT)
+		transformbentry = Entry(objtos3oframe,width=4,textvariable=self.transformB)
+		transformbentry.pack(side=LEFT)
+		Tooltip(transformbentry, text="How much to add to all U (horizontal) coordinates")
 		self.transformB.set('0')
 		
 		Label(objtos3oframe,text='    V=').pack(side=LEFT)
 		self.transformC=StringVar()
-		Entry(objtos3oframe,width=4,textvariable=self.transformC).pack(side=LEFT)
+		transformcentry = Entry(objtos3oframe,width=4,textvariable=self.transformC)
+		transformcentry.pack(side=LEFT)
+		Tooltip(transformcentry, text="How much to multiply all V (vertical) coordinates with")
 		self.transformC.set('1')
 		
 		Label(objtos3oframe,text='* V +').pack(side=LEFT)
 		self.transformD=StringVar()
-		Entry(objtos3oframe,width=4,textvariable=self.transformD).pack(side=LEFT)
+		transformdentry = Entry(objtos3oframe,width=4,textvariable=self.transformD)
+		transformdentry.pack(side=LEFT)
+		Tooltip(transformdentry, text="How much to add to all U (horizontal) coordinates")
 		self.transformD.set('0')
+
 		Label(frame,wraplength=600, justify=LEFT, text ='Instructions and notes:\n1. Converting S3O to OBJ:\n Open an s3o file, and the obj file will be saved with the same name and an .obj extension\n The name of each object in the .obj file will reflect the naming and pieces of the s3o file. All s3o data is retained, and is listed as a series of parameters in the object\'s name.\nExample:\no base,ox=-0.00,oy=0.00,oz=0.00,p=,mx=-0.00,my=4.00,mz=0.00,r=17.50,h=21.00,t1=tex1.png,t2=tex2.png\n ALL s3o info is retained, including piece hierarchy, piece origins, smoothing groups, vertex normals, and even degenerate pieces with no geometry used as emit points and vectors. These emit pieces will be shown as triangles with their correct vertex ordering.\n2. Converting OBJ to S3O:\n The opened .obj file will be converted into s3o. If the piece names contain the information as specified in the above example, the entire model hierarchy will be correctly converted. If it doesnt, then the program will convert each object as a child piece of an empty base object.').pack(side=BOTTOM)
 
 	def openobj(self):
