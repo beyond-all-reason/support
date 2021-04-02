@@ -8,3 +8,5 @@ put "$1" "$demoName.filepart"
 rename "$demoName.filepart" "$demoName"
 exit
 EOF
+
+# line endings fixed
