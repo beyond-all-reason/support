@@ -49,9 +49,11 @@ perl ../spads.pl spads_cluster.conf \
 	CMD_baseAutoHostPort=53100 \
 	CMD_hostRegion="EU - " \
 	CMD_enginesBaseDir=/home/eru/spads/var/spring/ \
-	CMD_engineDir=spring_bar_.BAR.104.0.1-1762-geebb4d7_linux-64-minimal-portable/ \
+	CMD_engineDir=spring_bar_.BAR.104.0.1-1828-g1f481b7_linux-64-minimal-portable/ \
 	CMD_springDataDir=/home/eru/spads/var/spring/data \
 	CMD_endGameCommandPath=/home/eru/spads/upload_replay.sh \
 	CMD_localLanIp=192.168.1.102 \
+	CMD_maxInstances=99 \
+	
 
 
