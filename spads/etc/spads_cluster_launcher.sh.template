@@ -54,6 +54,7 @@ perl ../spads.pl spads_cluster.conf \
 	CMD_endGameCommandPath=/home/eru/spads/upload_replay.sh \
 	CMD_localLanIp=192.168.1.102 \
 	CMD_maxInstances=99 \
+	CMD_targetSpares=1 \
 	
 
 
