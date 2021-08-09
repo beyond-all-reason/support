@@ -626,7 +626,7 @@ def bakeAOPlateS3O(filepath, xnormalpath, sizex = 5, sizez = 5, resolution= 128)
 
 
 	#--------------------- compress to dds------------------------
-	cmd='nvdxt -dxt5 -quality_highest -file "%s"'%(basename+"_aoplane.png")
+	cmd='nvdxt -flip -dxt5 -quality_highest -file "%s"'%(basename+"_aoplane.png")
 	print cmd
 	os.system(cmd)
 
@@ -840,6 +840,37 @@ def addemptybase(filename):
 		output_file.close()
 		print '[INFO]',"Succesfully optimized", filename
 
+def bend_foliage_normals(model, minu = 0, maxu = 0.5, minv = 0, maxv = 1, blendfactor=0.55, heightpct = 0.15):
+	print ("Bending")
+
+	maxh = 0
+	for vertex in model.root_piece.vertices:
+		maxh = max(vertex[0][1],maxh)
+	vertexmid = [0,maxh*heightpct,0]
+	for i, vertex in enumerate(model.root_piece.vertices):
+		v,n,uv = vertex
+		if uv[0] >= minu and uv[0] <= maxu and uv[1] >= minv and uv[1] <= maxv:
+			#find vertex pointing towards v
+			#normalize it
+			#blend with original
+			#normalize it
+			#pack it back
+			midtov = vectorminus(v,vertexmid)
+			midtov = normalize(midtov)
+			n = normalize(n)
+			#midtov = vectormult(midtov,[blendfactor,blendfactor,blendfactor])
+			mix = vectormix(midtov,n,blendfactor)
+			newvn = normalize(mix)
+			newuv = (max(minu + 0.008, min(maxu - 0.008,uv[0])), uv[1])#this is what human scum looks like
+			model.root_piece.vertices[i] = (v,tuple(newvn),newuv)
+		else:
+			newuv = ((uv[0]+0.1)*0.9, uv[1])
+			model.root_piece.vertices[i] = (v, n, newuv)
+	recursively_optimize_pieces(model.root_piece)
+	return model
+
+
+
 #def swaptex(filename,tex1,tex2):
 chickenlist = """chickena.s3o	chicken_red_l_color.dds	chicken_l_other.png
 chickenab.s3o	chicken_redb_l_color.dds	chicken_l_other.png
@@ -910,7 +941,19 @@ for line in chickenlist.split('\n'):
 	#swaptex(path, linesp[1],linesp[2])
 	#bakeAOS3O(path,"C:\\Program Files\\xNormal\\3.19.3\\x64\\xNormal.exe",isflying= (linesp[0] in flyers))
 #exit(1)
-
+'''
+outdir = "N:/maps/features/"
+basedir = "N:/maps/features/artturi/"
+for file in os.listdir(basedir):
+	if file.endswith('.s3o') and "_bend" not in file:
+		model =bend_foliage_normals(S3O(open(basedir+file,'rb').read()))
+		model.texture_paths = (model.texture_paths[0].replace('mtt-','btreea'), model.texture_paths[1].replace(".tga",".dds").replace('mtt-','btreea'))
+		print (file, model.texture_paths[0],model.texture_paths[1])
+		outf = open(outdir+file,'wb')
+		outf.write(model.serialize())
+		outf.close()
+exit(1)
+'''
 root = Tk()
 app = App(root)
 root.mainloop()

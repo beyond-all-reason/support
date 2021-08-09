@@ -40,6 +40,14 @@ def vectoradd(a, b):
 def vectorminus(a, b):
 	return (a[0] - b[0], a[1] - b[1], a[2] - b[2])
 
+def vectormult(a,b):
+	return (a[0] * b[0], a[1] * b[1], a[2] * b[2])
+
+def vectorscalarmult(a,b):
+	return(a[0] * b, a[1] * b, a[2] * b)
+
+def vectormix(a,b,f):
+	return vectoradd(vectorscalarmult(a,f),vectorscalarmult(b,1.0-f))
 
 def normalize(a):
 	l = vectorlength(a)
@@ -512,7 +520,7 @@ class S3O(object):
 									emittype = int(kv[2])
 								if kv[0] == 'p':
 									piece.parent = kv[2] + b'\x00'
-								print '[INFO]', kv
+								# print '[INFO]', kv
 							except ValueError:
 								print '[ERROR]', 'Failed to parse parameter', p, 'in', objfile[i]
 					piece.name = objfile[i].partition(' ')[2].strip().partition(',')[0][0:20] + b'\x00'
@@ -630,7 +638,15 @@ class S3O(object):
 					piece.parent = piecedict[newroot.name]
 			# now that we have the hiearchy set up right, its time to calculate offsets!
 
+			def recurseprintpieces(p, depth = 0):
+				print '[INFO]',"-"*depth, p.name
+				for child in p.children:
+					recurseprintpieces(child, depth=depth+1)
+			recurseprintpieces(newroot)
+
 			print '[INFO]', 'The new root pieces is', newroot
+
+			recurseprintpieces(self.root_piece)
 			self.root_piece = newroot
 
 			self.adjustobjtos3ooffsets(self.root_piece, 0, 0, 0)
@@ -800,6 +816,14 @@ class S3OPiece(object):
 						  "triangle strips": 1,
 						  "quads": 2}[self.primitive_type]
 
+		# Even nastier HACK: if there are no children, vertices or primitives, point one back to avoid pointing outside of file!
+		if len(self.children) == 0:
+			children_offset = children_offset - 1
+		if len(self.vertices) == 0:
+			vertex_offset = vertex_offset - 1
+		if len(self.indices) == 0:
+			index_offset = index_offset - 1
+
 		args = (name_offset, len(self.children), children_offset,
 				len(self.vertices), vertex_offset, 0, primitive_type,
 				len(self.indices), index_offset, 0) + self.parent_offset
@@ -822,5 +846,4 @@ class S3OPiece(object):
 
 		data = piece_header + encoded_name + child_data + vertex_data + \
 			   index_data + serialized_child_data
-
 		return data
