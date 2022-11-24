@@ -1,0 +1,129 @@
+// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corak_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9))
+//use call-script DeathAnim(); from Killed()
+DeathAnim() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corak_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9)) 
+	signal SIG_WALK;
+	signal SIG_AIM;
+	call-script StopWalking();
+	turn aimy1 to y-axis <0> speed <120>;
+	turn aimx1 to x-axis <0> speed <120>;
+		if (TRUE) { //Frame:10
+		sleep 296;
+		}
+		if (TRUE) { //Frame:12
+			move pelvis to y-axis [1.326019] speed [19.890289] ; 
+		sleep 65;
+		}
+		if (TRUE) { //Frame:13
+		sleep 32;
+		}
+		if (TRUE) { //Frame:17
+			move lfoot to z-axis [0.569770] speed [4.273272] ; 
+			move lfoot to y-axis [0.262465] speed [1.968484] ; 
+			move pelvis to y-axis [-3.238375] speed [34.232955] ; 
+		sleep 131;
+		}
+		if (TRUE) { //Frame:18
+			move lknee to z-axis [-0.203283] speed [6.098475] ; 
+			move lthigh to z-axis [-0.179723] speed [5.391698] ; 
+			move rfoot to z-axis [-0.657374] speed [19.721233] ; 
+			move rfoot to y-axis [-0.300262] speed [9.007870] ; 
+			move rknee to z-axis [0.200448] speed [6.013442] ; 
+			move rthigh to z-axis [0.179723] speed [5.391698] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:19
+			explode lleg type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide lleg;
+			explode lfoot type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide lfoot;
+			move pelvis to y-axis [-2.411854] speed [24.795613] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:22
+			move luparm to z-axis [0.449032] speed [4.490317] ; 
+			move ruparm to z-axis [-0.449032] speed [4.490318] ; 
+		sleep 98;
+		}
+		if (TRUE) { //Frame:23
+			move pelvis to x-axis [0.138076] speed [4.811352] ; 
+			move pelvis to z-axis [2.047218] speed [61.772053] ; 
+			move pelvis to y-axis [-4.230496] speed [54.559264] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:26
+			move luparm to z-axis [-0.205988] speed [6.550200] ; 
+			move luparm to y-axis [0.827387] speed [9.194051] ; 
+			move ruparm to z-axis [0.205988] speed [6.550200] ; 
+			move ruparm to y-axis [-0.827388] speed [9.194051] ; 
+			move torso to x-axis [-0.386327] speed [3.863271] ; 
+			move torso to z-axis [2.504726] speed [25.047259] ; 
+			move torso to y-axis [-0.490137] speed [4.901366] ; 
+		sleep 98;
+		}
+		if (TRUE) { //Frame:27
+		sleep 32;
+		}
+		if (TRUE) { //Frame:28
+			move luparm to z-axis [0.929304] speed [34.058765] ; 
+			move luparm to y-axis [0.280227] speed [16.414795] ; 
+			move pelvis to x-axis [-0.025880] speed [4.918687] ; 
+			move pelvis to z-axis [6.312909] speed [127.970731] ; 
+			move pelvis to y-axis [-7.935246] speed [111.142473] ; 
+			move rthigh to x-axis [0.173037] speed [5.371613] ; 
+			move rthigh to z-axis [-0.505073] speed [20.543879] ; 
+			move rthigh to y-axis [-0.842516] speed [22.933187] ; 
+			move ruparm to z-axis [-0.929304] speed [34.058763] ; 
+			move ruparm to y-axis [-0.280228] speed [16.414800] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:29
+		sleep 32;
+		}
+		if (TRUE) { //Frame:30
+			move luparm to z-axis [1.767531] speed [25.146804] ; 
+			move luparm to y-axis [-0.202747] speed [14.489218] ; 
+			move ruparm to z-axis [-1.767531] speed [25.146806] ; 
+			move ruparm to y-axis [0.202746] speed [14.489217] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:31
+			move rleg to x-axis [0.195044] speed [5.851331] ; 
+			move rleg to z-axis [-0.928235] speed [27.847041] ; 
+			move rleg to y-axis [0.701110] speed [21.033306] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:32
+			move luparm to z-axis [1.551835] speed [6.470869] ; 
+			move ruparm to z-axis [-1.551836] speed [6.470858] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:33
+			move rleg to x-axis [-0.025706] speed [6.622518] ; 
+			move rleg to z-axis [0.411696] speed [40.197927] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:34
+			move luparm to z-axis [1.340498] speed [6.340098] ; 
+			move ruparm to z-axis [-1.340499] speed [6.340098] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:35
+			move rleg to x-axis [-0.425446] speed [11.992194] ; 
+			move rleg to z-axis [1.513802] speed [33.063169] ; 
+			move rleg to y-axis [0.163389] speed [16.772401] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:36
+			move luparm to z-axis [1.450964] speed [3.313980] ; 
+			move ruparm to z-axis [-1.450965] speed [3.313980] ; 
+		sleep 32;
+		}
+		if (TRUE) { //Frame:38
+		sleep 65;
+		}
+		if (TRUE) { //Frame:39
+			move luparm to z-axis [1.274773] speed [5.285740] ; 
+			move ruparm to z-axis [-1.274774] speed [5.285718] ; 
+		sleep 32;
+		}
+}
