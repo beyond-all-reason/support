@@ -1,28 +1,26 @@
-// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corck_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9))
-static-var bAnimate;
-// start-script Animate(); //from RestoreAfterDelay
-Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corck_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9)) 
-	set-signal-mask SIG_WALK | SIG_AIM; //you might need this
-	sleep 100*RAND(30,256);//sleep between 3 and 25.6 seconds
-	bAnimate = TRUE;
-		if (bAnimate) { //Frame:2
-			move beamhinge to x-axis [316.751282] speed [9502.538452] ; //WARNING: possible gimbal lock issue detected in frame 2 bone beamhinge
-
-			move beamhinge to z-axis [-359.305237] speed [10779.157104] ; //WARNING: possible gimbal lock issue detected in frame 2 bone beamhinge
-
-			move beamhinge to y-axis [263.207001] speed [7896.210022] ; //WARNING: possible gimbal lock issue detected in frame 2 bone beamhinge
-
+// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\death_anims\corck_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9))
+//use call-script DeathAnim(); from Killed()
+DeathAnim() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\death_anims\corck_anim_death.blend Created by https://github.com/Beherith/Skeletor_S3O V((0, 3, 9)) 
+	signal SIG_WALK;
+	signal SIG_AIM;
+	call-script StopWalking();
+	turn aimy1 to y-axis <0> speed <120>;
+	turn aimx1 to x-axis <0> speed <120>;
+		if (TRUE) { //Frame:2
+			explode beamhinge type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide beamhinge;
+			explode beamcase type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide beamcase;
+			explode nano type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide nano;
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:10
-			move lfoot to x-axis [-112.720734] speed [422.702751] ; 
-			move lfoot to z-axis [-124.616943] speed [467.313538] ; //WARNING: possible gimbal lock issue detected in frame 10 bone lfoot
-
-			move lfoot to y-axis [230.249786] speed [863.436699] ; //WARNING: possible gimbal lock issue detected in frame 10 bone lfoot
-
+		if (TRUE) { //Frame:10
+			explode lfoot type FALL|SMOKE|FIRE|NOHEATCLOUD;
+			hide lfoot;
 		sleep 263;
 		}
-		if (bAnimate) { //Frame:12
+		if (TRUE) { //Frame:12
 			turn lleg to x-axis <-3.448829> speed <51.732440> ; 
 			turn lleg to z-axis <0.324182> speed <4.862729> ; 
 			turn lleg to y-axis <0.693010> speed <10.395151> ; 
@@ -45,7 +43,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <3.612047> speed <54.180704> ; 
 		sleep 65;
 		}
-		if (bAnimate) { //Frame:13
+		if (TRUE) { //Frame:13
 			turn lleg to x-axis <-5.173244> speed <51.732446> ; 
 			turn lleg to z-axis <0.486273> speed <4.862729> ; 
 			turn lleg to y-axis <1.039515> speed <10.395150> ; 
@@ -61,7 +59,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <1.967166> speed <49.346441> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:14
+		if (TRUE) { //Frame:14
 			turn lleg to x-axis <-6.897658> speed <51.732421> ; 
 			turn lleg to z-axis <0.648364> speed <4.862738> ; 
 			turn lleg to y-axis <1.386020> speed <10.395153> ; 
@@ -82,7 +80,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <0.322284> speed <49.346444> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:16
+		if (TRUE) { //Frame:16
 			turn lleg to x-axis <-10.346488> speed <51.732440> ; 
 			turn lleg to z-axis <0.972547> speed <4.862741> ; 
 			turn lleg to y-axis <2.079030> speed <10.395150> ; 
@@ -107,7 +105,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-3.475773> speed <56.970852> ; 
 		sleep 65;
 		}
-		if (bAnimate) { //Frame:18
+		if (TRUE) { //Frame:18
 			turn lleg to x-axis <-13.795318> speed <51.732459> ; 
 			turn lleg to z-axis <1.296726> speed <4.862692> ; 
 			turn lleg to y-axis <2.772040> speed <10.395150> ; 
@@ -129,7 +127,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-7.273830> speed <56.970853> ; 
 		sleep 65;
 		}
-		if (bAnimate) { //Frame:19
+		if (TRUE) { //Frame:19
 			turn lleg to x-axis <-15.519732> speed <51.732408> ; 
 			turn lleg to z-axis <1.458818> speed <4.862761> ; 
 			turn lleg to y-axis <3.118546> speed <10.395166> ; 
@@ -152,7 +150,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-6.434024> speed <25.194177> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:20
+		if (TRUE) { //Frame:20
 			turn lleg to x-axis <-0.300967> speed <9.029014> ; 
 			turn lleg to x-axis <-17.244144> speed <51.732382> ; 
 			turn lleg to z-axis <1.620909> speed <4.862729> ; 
@@ -174,7 +172,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-5.594218> speed <25.194164> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:23
+		if (TRUE) { //Frame:23
 			turn lthigh to x-axis <-0.401430> speed <4.014300> ; 
 			turn lthigh to z-axis <-0.131213> speed <1.312131> ; 
 			turn lthigh to y-axis <-0.178914> speed <1.789145> ; 
@@ -195,7 +193,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-3.074800> speed <25.194177> ; 
 		sleep 98;
 		}
-		if (bAnimate) { //Frame:24
+		if (TRUE) { //Frame:24
 			turn rfoot to x-axis <43.823720> speed <234.474179> ; 
 			turn rfoot to z-axis <-30.579102> speed <165.407391> ; 
 			turn rfoot to y-axis <19.918836> speed <207.993860> ; 
@@ -211,7 +209,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-2.234995> speed <25.194171> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:25
+		if (TRUE) { //Frame:25
 			move pelvis to x-axis [-0.401139] speed [11.068679] ; 
 			move pelvis to y-axis [-8.000496] speed [141.569066] ; 
 			turn rfoot to x-axis <43.506669> speed <9.511517> ; 
@@ -225,7 +223,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn rthigh to y-axis <-5.563198> speed <21.274537> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:26
+		if (TRUE) { //Frame:26
 			move lthigh to x-axis [-0.306921] speed [9.207621] ; 
 			move lthigh to z-axis [0.654214] speed [19.626423] ; 
 			move lthigh to y-axis [2.326429] speed [69.792881] ; 
@@ -241,7 +239,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn rthigh to y-axis <-6.050096> speed <14.606919> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:27
+		if (TRUE) { //Frame:27
 			move lthigh to x-axis [-0.201112] speed [3.174264] ; 
 			move lthigh to z-axis [0.857875] speed [6.109834] ; 
 			move lthigh to y-axis [4.725233] speed [71.964111] ; 
@@ -264,7 +262,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn rthigh to y-axis <-6.742849> speed <20.782609> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:28
+		if (TRUE) { //Frame:28
 			turn lthigh to x-axis <-22.561401> speed <13.165241> ; 
 			turn lthigh to z-axis <-13.847621> speed <189.889905> ; 
 			turn lthigh to y-axis <-12.265423> speed <60.431396> ; 
@@ -281,7 +279,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn rthigh to y-axis <-30.995357> speed <727.575242> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:29
+		if (TRUE) { //Frame:29
 			move lthigh to z-axis [0.728564] speed [3.879329] ; 
 			move lthigh to y-axis [6.581701] speed [55.694046] ; 
 			turn lthigh to z-axis <-0.352160> speed <6.628405> ; 
@@ -303,7 +301,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:30
+		if (TRUE) { //Frame:30
 			turn lthigh to z-axis <-19.626502> speed <16.523286> ; 
 			turn lthigh to y-axis <-15.709100> speed <42.878997> ; 
 			turn pelvis to x-axis <-1.260298> speed <24.151228> ; 
@@ -326,7 +324,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <-0.381194> speed <55.614026> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:31
+		if (TRUE) { //Frame:31
 			turn lthigh to z-axis <-19.075721> speed <16.523440> ; 
 			turn lthigh to y-axis <-17.138393> speed <42.878766> ; 
 			move pelvis to x-axis [-0.916857] speed [6.189744] ; 
@@ -358,7 +356,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <1.472607> speed <55.614026> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:32
+		if (TRUE) { //Frame:32
 			turn lthigh to z-axis <-18.524945> speed <16.523286> ; 
 			turn lthigh to y-axis <-18.567688> speed <42.878869> ; 
 			turn rfoot to x-axis <68.689129> speed <231.583165> ; 
@@ -383,7 +381,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <3.326408> speed <55.614026> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:33
+		if (TRUE) { //Frame:33
 			turn lthigh to z-axis <-17.974167> speed <16.523338> ; 
 			turn lthigh to y-axis <-19.996987> speed <42.878971> ; 
 			move pelvis to x-axis [-1.569327] speed [19.574118] ; 
@@ -404,7 +402,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <6.421465> speed <92.851707> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:34
+		if (TRUE) { //Frame:34
 			move lthigh to x-axis [-1.757070] speed [45.516862] ; 
 			move lthigh to z-axis [1.224664] speed [14.883006] ; 
 			move lthigh to y-axis [4.993381] speed [47.649608] ; 
@@ -424,7 +422,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <9.516522> speed <92.851726> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:35
+		if (TRUE) { //Frame:35
 			move pelvis to x-axis [-1.993793] speed [12.733977] ; 
 			move pelvis to z-axis [-2.687359] speed [5.153360] ; 
 			move pelvis to y-axis [-13.222705] speed [54.797430] ; 
@@ -441,7 +439,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <12.295088> speed <83.356986> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:36
+		if (TRUE) { //Frame:36
 			turn rfoot to x-axis <68.726770> speed <10.777014> ; 
 			turn rfoot to z-axis <-13.307478> speed <42.775801> ; 
 			turn rfoot to y-axis <32.876849> speed <8.399493> ; 
@@ -456,7 +454,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <15.073655> speed <83.357012> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:37
+		if (TRUE) { //Frame:37
 			turn rfoot to x-axis <-0.599268> speed <3.462912> ; 
 			turn rfoot to z-axis <-0.578406> speed <5.866370> ; 
 			turn rfoot to x-axis <69.096741> speed <11.099126> ; 
@@ -472,7 +470,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <13.833778> speed <37.196322> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:38
+		if (TRUE) { //Frame:38
 			turn rthigh to x-axis <-110.538668> speed <112.249788> ; 
 			turn rthigh to z-axis <71.386590> speed <154.015302> ; 
 			turn rthigh to y-axis <61.295108> speed <139.159128> ; 
@@ -482,7 +480,7 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <12.593902> speed <37.196297> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:39
+		if (TRUE) { //Frame:39
 			turn rleg to x-axis <0.794045> speed <8.296512> ; 
 			turn rleg to z-axis <-0.673303> speed <22.782568> ; 
 			turn rleg to y-axis <0.635839> speed <22.055062> ; 
@@ -494,54 +492,11 @@ Animate() {// For C:\Users\ptasz\Documents\GitHub\support\Animation_sources\corc
 			turn torso to y-axis <13.165608> speed <17.151194> ; 
 		sleep 32;
 		}
-		if (bAnimate) { //Frame:42
+		if (TRUE) { //Frame:42
 			turn torso to x-axis <0.465459> speed <1.659870> ; 
 			turn torso to x-axis <26.668808> speed <71.327666> ; 
 			turn torso to z-axis <-12.045590> speed <8.098675> ; 
 			turn torso to y-axis <14.880728> speed <17.151203> ; 
 		sleep 98;
 		}
-}
-// Call this from MotionControl()!
-StopAnimation() {
-	move beamhinge to x-axis [0.000000] speed [95025.384521] / animSpeed;
-	move beamhinge to y-axis [0.000000] speed [78962.100220] / animSpeed;
-	move beamhinge to z-axis [0.000000] speed [107791.571045] / animSpeed;
-	move lfoot to x-axis [0.000000] speed [4227.027512] / animSpeed;
-	move lfoot to y-axis [0.000000] speed [8634.366989] / animSpeed;
-	move lfoot to z-axis [0.000000] speed [4673.135376] / animSpeed;
-	move lthigh to x-axis [0.000000] speed [455.168617] / animSpeed;
-	move lthigh to y-axis [0.000000] speed [719.641113] / animSpeed;
-	move lthigh to z-axis [0.000000] speed [196.264225] / animSpeed;
-	move pelvis to x-axis [0.000000] speed [195.741177] / animSpeed;
-	move pelvis to y-axis [0.000000] speed [1415.690660] / animSpeed;
-	move pelvis to z-axis [0.000000] speed [282.586938] / animSpeed;
-	move rfoot to y-axis [0.000000] speed [52.497947] / animSpeed;
-	move rfoot to z-axis [0.000000] speed [395.214057] / animSpeed;
-	move rleg to y-axis [0.000000] speed [228.794557] / animSpeed;
-	move rleg to z-axis [0.000000] speed [285.810363] / animSpeed;
-	move rthigh to x-axis [0.000000] speed [410.867290] / animSpeed;
-	move rthigh to y-axis [0.000000] speed [906.524277] / animSpeed;
-	move rthigh to z-axis [0.000000] speed [126.634812] / animSpeed;
-	turn lleg to x-axis <0.000000> speed <517.324590> / animSpeed;
-	turn lleg to y-axis <0.000000> speed <103.951659> / animSpeed;
-	turn lleg to z-axis <0.000000> speed <48.627607> / animSpeed;
-	turn lthigh to x-axis <0.000000> speed <1725.018144> / animSpeed;
-	turn lthigh to y-axis <0.000000> speed <768.828240> / animSpeed;
-	turn lthigh to z-axis <0.000000> speed <1898.899055> / animSpeed;
-	turn pelvis to x-axis <0.000000> speed <241.512330> / animSpeed;
-	turn pelvis to y-axis <0.000000> speed <193.780193> / animSpeed;
-	turn pelvis to z-axis <0.000000> speed <1959.676383> / animSpeed;
-	turn rfoot to x-axis <0.000000> speed <3374.689662> / animSpeed;
-	turn rfoot to y-axis <0.000000> speed <13463.255409> / animSpeed;
-	turn rfoot to z-axis <0.000000> speed <12670.085647> / animSpeed;
-	turn rleg to x-axis <0.000000> speed <14221.881020> / animSpeed;
-	turn rleg to y-axis <0.000000> speed <1789.819888> / animSpeed;
-	turn rleg to z-axis <0.000000> speed <1397.827639> / animSpeed;
-	turn rthigh to x-axis <0.000000> speed <11987.172556> / animSpeed;
-	turn rthigh to y-axis <0.000000> speed <21816.370781> / animSpeed;
-	turn rthigh to z-axis <0.000000> speed <22165.252500> / animSpeed;
-	turn torso to x-axis <0.000000> speed <2689.231770> / animSpeed;
-	turn torso to y-axis <0.000000> speed <928.517260> / animSpeed;
-	turn torso to z-axis <0.000000> speed <1118.335858> / animSpeed;
 }
