@@ -1,9 +1,0 @@
-[Unit]
-Description=Run pr-downloader every 5min
-
-[Timer]
-OnActiveSec=5sec
-OnUnitActiveSec=5min
-
-[Install]
-WantedBy=timers.target
